@@ -1,46 +1,54 @@
-﻿namespace MyFitness.BL.Models
+﻿using System.Runtime.Serialization;
+
+namespace MyFitness.BL.Models
 {
     /// <summary>
     /// User.
     /// </summary>
+    [DataContract]
     public class User
     {
         /// <summary>
         /// Name.
         /// </summary>
-        public string? Name { get; }
+        [DataMember]
+        public string? Name { get; set; }
 
         /// <summary>
         /// Gender.
         /// </summary>
-        public Gender? Gender { get; }
+        [DataMember]
+        public Gender? Gender { get; set; }
 
         /// <summary>
         /// Birth date.
         /// </summary>
-        public DateTime BirthDate { get; }
+        [DataMember]
+        public DateTime DateOfBirth { get; set; }
 
         /// <summary>
         /// Weight
         /// </summary>
-        public double Weight { get; }
+        [DataMember]
+        public double Weight { get; set; }
 
         /// <summary>
         /// Height.
         /// </summary>
-        public double Height { get; }
+        [DataMember]
+        public double Height { get; set; }
 
         /// <summary>
         /// Create new user.
         /// </summary>
         /// <param name="name">User name.</param>
         /// <param name="gender">User gender.</param>
-        /// <param name="birthDate">User birthday.</param>
+        /// <param name="birthDate">User date of birth.</param>
         /// <param name="weight">User weight.</param>
         /// <param name="height">User height.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="InvalidDataException"></exception>
-        public User(string name, Gender gender, DateTime birthDate, double weight, double height)
+        public User(string name, Gender gender, DateTime dateOfBirth, double weight, double height)
         {
             #region Parameters validation
 
@@ -48,8 +56,8 @@
                 throw new ArgumentNullException(nameof(name));
             if (gender == null)
                 throw new ArgumentNullException(nameof(gender));
-            if (birthDate < DateTime.Parse("01.01.1900") || birthDate > DateTime.Now)
-                throw new InvalidDataException(nameof(birthDate));
+            if (dateOfBirth < DateTime.Parse("01.01.1900") || dateOfBirth > DateTime.Now)
+                throw new InvalidDataException(nameof(dateOfBirth));
             if (weight < 0.0)
                 throw new InvalidDataException(nameof(weight));
             if (height < 0.0)
@@ -59,7 +67,7 @@
 
             Name = name;
             Gender = gender;
-            BirthDate = birthDate;
+            DateOfBirth = dateOfBirth;
             Weight = weight;
             Height = height;
         }
