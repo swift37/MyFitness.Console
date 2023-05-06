@@ -20,7 +20,7 @@ namespace MyFitness.BL.Controllers
         /// <summary>
         /// Users list.
         /// </summary>
-        public List<User>? Users { get; } = new List<User>();
+        public List<User>? Users { get; } 
 
         /// <summary>
         /// Current user.
@@ -71,10 +71,10 @@ namespace MyFitness.BL.Controllers
 
             using (var stream = new FileStream("users.json", FileMode.OpenOrCreate))
             {
-                if (serializer.ReadObject(stream) is List<User> users)
+                if (stream.Length > 0 && serializer.ReadObject(stream) is List<User> users)
                     return users;
 
-                return null;
+                return new List<User>();
             }
         }
 

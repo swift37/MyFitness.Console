@@ -5,7 +5,9 @@ VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyFitness.BL", "MyFitness.BL\MyFitness.BL.csproj", "{6537C225-5AAB-45F5-A70A-677AA4D99AED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFitness.View", "MyFitness.View\MyFitness.View.csproj", "{77A91670-5F40-455F-B28B-28C7FFD6E5DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyFitness.View", "MyFitness.View\MyFitness.View.csproj", "{77A91670-5F40-455F-B28B-28C7FFD6E5DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFitness.BLTests", "MyFitness.BLTests\MyFitness.BLTests.csproj", "{BE3E520A-FDD2-413A-A98B-1C9B19650E36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{77A91670-5F40-455F-B28B-28C7FFD6E5DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77A91670-5F40-455F-B28B-28C7FFD6E5DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77A91670-5F40-455F-B28B-28C7FFD6E5DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE3E520A-FDD2-413A-A98B-1C9B19650E36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE3E520A-FDD2-413A-A98B-1C9B19650E36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE3E520A-FDD2-413A-A98B-1C9B19650E36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE3E520A-FDD2-413A-A98B-1C9B19650E36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
