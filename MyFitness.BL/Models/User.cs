@@ -11,32 +11,39 @@ namespace MyFitness.BL.Models
         /// <summary>
         /// Name.
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "name")]
         public string? Name { get; set; }
 
         /// <summary>
         /// Gender.
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "gender")]
         public Gender? Gender { get; set; }
 
         /// <summary>
         /// Birth date.
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "date_of_birth")]
         public DateTime DateOfBirth { get; set; }
 
         /// <summary>
         /// Weight
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "weight")]
         public double Weight { get; set; }
 
         /// <summary>
         /// Height.
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "height")]
         public double Height { get; set; }
+
+
+        /// <summary>
+        /// Age.
+        /// </summary>
+        [DataMember(Name = "age")]
+        public int Age { get; set; }
 
         /// <summary>
         /// Create new user.
@@ -48,7 +55,7 @@ namespace MyFitness.BL.Models
         /// <param name="height">User height.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="InvalidDataException"></exception>
-        public User(string name, Gender gender, DateTime dateOfBirth, double weight, double height)
+        public User(string? name, Gender gender, DateTime dateOfBirth, double weight, double height)
         {
             #region Parameters validation
 
@@ -70,11 +77,40 @@ namespace MyFitness.BL.Models
             DateOfBirth = dateOfBirth;
             Weight = weight;
             Height = height;
+            SetUserAge();
+        }
+
+        /// <summary>
+        /// Create new user.
+        /// </summary>
+        /// <param name="name">User name.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public User(string name)
+        {
+            #region Parameters validation
+
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentNullException(nameof(name));
+
+            #endregion
+
+            Name = name;
+            DateOfBirth = DateTime.Now;
+        }
+
+        /// <summary>
+        /// Set user age.
+        /// </summary>
+        public void SetUserAge()
+        {
+            var age = DateTime.Now.Year - DateOfBirth.Year;
+            if (DateTime.Now < DateOfBirth.AddYears(age)) age--;
+            Age = age;
         }
 
         public override string ToString()
         {
-            return $"{Name}";
+            return $"{Name}, {Age} y.o.";
         }
     }
 }

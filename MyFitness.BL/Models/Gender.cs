@@ -22,9 +22,11 @@ namespace MyFitness.BL.Models
         /// <exception cref="ArgumentNullException"></exception>
         public Gender(string? name)
         {
-            if (string.IsNullOrWhiteSpace(name)) 
-                throw new ArgumentNullException(nameof(name));
-            
+            #region Data validation
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentNullException(nameof(name)); 
+            #endregion
+
             Name = name;
         }
 

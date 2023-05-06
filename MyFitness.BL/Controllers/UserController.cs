@@ -18,57 +18,84 @@ namespace MyFitness.BL.Controllers
     public class UserController
     {
         /// <summary>
-        /// User.
+        /// Users list.
         /// </summary>
-        public User? User { get; }
-
         public List<User>? Users { get; } = new List<User>();
+
+        /// <summary>
+        /// Current user.
+        /// </summary>
+        public User? CurrentUser { get; }
+
+        /// <summary>
+        /// A field that determines whether the user is new or has already been registered.
+        /// </summary>
+        public bool IsNewUser { get; }
 
         /// <summary>
         /// Create new username controller.
         /// </summary>
         /// <param name="username"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public UserController(string? username, string? gender, DateTime birthday, double weight, double height)
+        public UserController(string? username)
         {
             #region Username validation
 
-            if (username is null || gender is null) 
+            if (username is null) 
                 throw new ArgumentNullException(nameof(username));
             if (string.IsNullOrWhiteSpace(username) && username.Length <= 0 && username.Length > 16)
                 throw new ArgumentException("Incorrect username.", nameof(username));
 
             #endregion
 
-            var userGender = new Gender(gender);
+            Users = LoadUsers();
 
-            var newUser = new User(username, userGender, birthday, weight, height);
+            CurrentUser = Users?.SingleOrDefault(user => user.Name == username);
 
-            Users?.Add(newUser);
+            if (CurrentUser is null)
+            {
+                IsNewUser = true;
+                CurrentUser = new User(username);
+            }
+                
         }
 
         /// <summary>
-        /// Load username data.
+        /// Load users data.
         /// </summary>
-        /// <returns>User.</returns>
+        /// <returns>Users list.</returns>
         /// <exception cref="FileLoadException"></exception>
-        public UserController()
+        private List<User>? LoadUsers()
         {
             var serializer = new DataContractJsonSerializer(typeof(List<User>));
 
             using (var stream = new FileStream("users.json", FileMode.OpenOrCreate))
             {
                 if (serializer.ReadObject(stream) is List<User> users)
-                    Users = users;
-                else
-                    Debug.WriteLine("Users not found");
+                    return users;
+
+                return null;
             }
+        }
+
+
+        public void CreateUserData(string? gender, DateTime dateOfBirth, double weight, double height)
+        {
+            if (CurrentUser is null) throw new ArgumentNullException(nameof(CurrentUser));
+
+            CurrentUser.Gender = new Gender(gender);
+            CurrentUser.DateOfBirth = dateOfBirth;
+            CurrentUser.Weight = weight;
+            CurrentUser.Height = height;
+            CurrentUser.SetUserAge();
+            Users?.Add(CurrentUser);
+            SaveUsers();
         }
 
         /// <summary>
         /// Save user data.
         /// </summary>
-        public void SaveUser()
+        public void SaveUsers()
         {
             var serializer = new DataContractJsonSerializer(typeof(List<User>));
 
