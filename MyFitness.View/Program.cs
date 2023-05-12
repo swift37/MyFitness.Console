@@ -1,7 +1,11 @@
 ﻿using MyFitness.BL.Controllers;
 using MyFitness.BL.Models;
+using MyFitness.View.Languages;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.SymbolStore;
+using System.Globalization;
+using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Threading.Channels;
 using System.Transactions;
@@ -12,25 +16,28 @@ namespace MyFitness.View
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("MyFitness was started!");
+            var culture = CultureInfo.CurrentCulture;
+            var rm = new ResourceManager("MyFitness.View.Languages.Lang", typeof(Program).Assembly);
 
-            Console.Write("Enter username: ");
+            Console.WriteLine(rm.GetString("AppStarted", culture));
+
+            Console.Write(rm.GetString("EnterUsername", culture));
             var username = Console.ReadLine();
             
             var userController = new UserController(username); 
 
             if (userController.IsNewUser)
             {
-                Console.Write("Enter gender: ");
+                Console.Write(rm.GetString("EnterGender", culture));
                 var gender = Console.ReadLine();
 
-                Console.Write("Enter date of birth: ");
+                Console.Write(rm.GetString("EnterDateOfBirth", culture));
                 var dateOfBirth = GetParsedValue<DateTime>("date of birth");
 
-                Console.Write("Enter weight: ");
+                Console.Write(rm.GetString("EnterWeight", culture));
                 var weight = GetParsedValue<double>("weight");
 
-                Console.Write("Enter height: ");
+                Console.Write(rm.GetString("EnterHeight", culture));
                 var height = GetParsedValue<double>("height");
 
                 userController.CreateUserData(gender, dateOfBirth, weight, height);

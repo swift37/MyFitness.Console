@@ -11,4 +11,28 @@
     <ProjectReference Include="..\MyFitness.BL\MyFitness.BL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Languages\Lang.Designer.cs">
+      <DependentUpon>Lang.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Languages\Lang.en-us.Designer.cs">
+      <DependentUpon>Lang.en-us.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Languages\Lang.resx">
+      <LastGenOutput>Lang.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Languages\Lang.en-us.resx">
+      <LastGenOutput>Lang.en-us.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
