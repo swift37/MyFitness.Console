@@ -15,8 +15,10 @@ namespace MyFitness.BL.Controllers
     /// <summary>
     /// User controller.
     /// </summary>
-    public class UserController
+    public class UserController : ControllerBase
     {
+        private const string FILE_PATH = "users.json";
+
         /// <summary>
         /// Users list.
         /// </summary>
@@ -60,25 +62,6 @@ namespace MyFitness.BL.Controllers
                 
         }
 
-        /// <summary>
-        /// Load users data.
-        /// </summary>
-        /// <returns>Users list.</returns>
-        /// <exception cref="FileLoadException"></exception>
-        private List<User>? LoadUsers()
-        {
-            var serializer = new DataContractJsonSerializer(typeof(List<User>));
-
-            using (var stream = new FileStream("users.json", FileMode.OpenOrCreate))
-            {
-                if (stream.Length > 0 && serializer.ReadObject(stream) is List<User> users)
-                    return users;
-
-                return new List<User>();
-            }
-        }
-
-
         public void CreateUserData(string? gender, DateTime dateOfBirth, double weight, double height)
         {
             if (CurrentUser is null) throw new ArgumentNullException(nameof(CurrentUser));
@@ -93,16 +76,22 @@ namespace MyFitness.BL.Controllers
         }
 
         /// <summary>
+        /// Load users data.
+        /// </summary>
+        /// <returns>Users list.</returns>
+        /// <exception cref="FileLoadException"></exception>
+        private List<User>? LoadUsers()
+        {
+            return LoadData<User>(FILE_PATH)?.ToList() ?? new List<User>();
+        }
+
+        /// <summary>
         /// Save user data.
         /// </summary>
         public void SaveUsers()
         {
-            var serializer = new DataContractJsonSerializer(typeof(List<User>));
-
-            using (var stream = new FileStream("users.json", FileMode.OpenOrCreate))
-            {
-                serializer.WriteObject(stream, Users);
-            }
+            if (Users is null) throw new ArgumentNullException(nameof(Users));
+            SaveData(FILE_PATH, Users);
         }
     }
 }

@@ -1,13 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MyFitness.BL.Controllers;
-using MyFitness.BL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyFitness.BL.Controllers.Tests
+﻿namespace MyFitness.BL.Controllers.Tests
 {
     [TestClass()]
     public class UserControllerTests
