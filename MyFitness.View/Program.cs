@@ -41,39 +41,100 @@ namespace MyFitness.View
                 var height = GetParsedValue<double>("height");
 
                 userController.CreateUserData(gender, dateOfBirth, weight, height);
+
+                Console.Clear();
             }
 
-            Console.WriteLine("\nCurrent user: {0}", userController.CurrentUser);
-            Console.WriteLine("\nSelect an action:");
-            Console.WriteLine("F - introduce food intake");
-            var key = Console.ReadKey();
-
-            switch (key.Key)
+            while (true)
             {
-                default:
-                    break;
-                case ConsoleKey.F:
-                    var foodIntakeController = new FoodIntakeController(userController.CurrentUser, DateTime.UtcNow);
-                    while (true)
-                    {
-                        var newMeal = EnterFoodIntake();
-                        foodIntakeController.Add(newMeal.Meal, newMeal.Weight);
+                Console.WriteLine("\nCurrent user: {0}", userController.CurrentUser);
+                Console.WriteLine("\nSelect an action:");
+                Console.WriteLine("F - add food intake");
+                Console.WriteLine("E - add exercise");
+                Console.WriteLine("Q - exit");
+                var key = Console.ReadKey();
+                Console.Clear();
 
-                        if (foodIntakeController.FoodIntake?.Meals is null) break;
+                switch (key.Key)
+                {
+                    case ConsoleKey.F:
+                        AddFoodIntake(userController.CurrentUser);
+                        continue;
 
-                        foreach (var item in foodIntakeController.FoodIntake.Meals)
-                        {
-                            Console.WriteLine($"\t{item.Key} - {item.Value} gr.");
-                        }
+                    case ConsoleKey.E:
+                        AddExercise(userController.CurrentUser);
+                        continue;
 
-                        Console.WriteLine("Would you like to add another meal? (Y/N)\n");
-                        if (Console.ReadKey().Key != ConsoleKey.Y) break;
-                    }
-                    break;
+                    case ConsoleKey.Q:
+                        break;
+
+                    default:
+                        continue;
+                }
+                break;
             }
         }
 
-        private static (Meal Meal, double Weight) EnterFoodIntake()
+        private static void AddExercise(User? user)
+        {
+            var exerciseController = new ExerciseController(user);
+
+            Console.WriteLine("\nEnter the name of activity: ");
+            var activityName = Console.ReadLine();
+
+            var activity = exerciseController.Activities?.SingleOrDefault(a => a.Name == activityName);
+
+            if (activity is null)
+            {
+                Console.WriteLine("Enter the number of calories burned per minute: ");
+                var caloriesPerMinute = GetParsedValue<double>("calories per minute");
+
+                activity = new Activity(activityName, caloriesPerMinute);
+            }
+
+            Console.WriteLine("Enter the start time of the exercise: ");
+            var start = GetParsedValue<DateTime>("start time of the exercise");
+            Console.WriteLine("Enter the end time of the exercise: ");
+            var finish = GetParsedValue<DateTime>("end time of the exercise");
+
+            exerciseController.Add(activity, start, finish);
+
+            if (exerciseController.Exercises is null) throw new ArgumentNullException(nameof(exerciseController.Exercises));
+
+            foreach (var item in exerciseController.Exercises)
+            {
+                #region Item validation
+
+                if (user?.Name is null) continue;
+                if (item.User?.Name != user.Name) continue; 
+
+                #endregion
+
+                Console.WriteLine($"\t{item.Activity?.Name}: {item.Start} - {item.Finish}");
+            }
+        }
+
+        private static void AddFoodIntake(User? user)
+        {
+            var foodIntakeController = new FoodIntakeController(user, DateTime.UtcNow);
+            while (true)
+            {
+                var newMeal = EnterMeal();
+                foodIntakeController.Add(newMeal.Meal, newMeal.Weight);
+
+                if (foodIntakeController.FoodIntake?.Meals is null) break;
+
+                foreach (var item in foodIntakeController.FoodIntake.Meals)
+                {
+                    Console.WriteLine($"\t{item.Key} - {item.Value} gr.");
+                }
+
+                Console.WriteLine("Would you like to add another meal? (Y/N)\n");
+                if (Console.ReadKey().Key != ConsoleKey.Y) break;
+            }
+        }
+
+        private static (Meal Meal, double Weight) EnterMeal()
         {
             Console.Write("\nEnter meal name: ");
             var mealName = Console.ReadLine();
