@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Librarian.DAL.Entities.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -11,14 +12,8 @@ namespace MyFitness.BL.Models
     /// Physical activity.
     /// </summary>
     [DataContract]
-    public class Activity
+    public class Activity : NamedEntity
     {
-        /// <summary>
-        /// Physical activity name.
-        /// </summary>
-        [DataMember(Name = "name")]
-        public string? Name { get; set; }
-
         /// <summary>
         /// Calories per minut.
         /// </summary>

@@ -61,11 +61,38 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to E - add exercise.
+        /// </summary>
+        internal static string AddExercise {
+            get {
+                return ResourceManager.GetString("AddExercise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to F - add food intake.
+        /// </summary>
+        internal static string AddFoodIntake {
+            get {
+                return ResourceManager.GetString("AddFoodIntake", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MyFitness was started!.
         /// </summary>
         internal static string AppStarted {
             get {
                 return ResourceManager.GetString("AppStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current user: .
+        /// </summary>
+        internal static string CurrentUser {
+            get {
+                return ResourceManager.GetString("CurrentUser", resourceCulture);
             }
         }
         
@@ -79,7 +106,7 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter gender:.
+        ///   Looks up a localized string similar to Enter gender: .
         /// </summary>
         internal static string EnterGender {
             get {
@@ -88,7 +115,7 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter height:.
+        ///   Looks up a localized string similar to Enter height: .
         /// </summary>
         internal static string EnterHeight {
             get {
@@ -106,11 +133,29 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter weight:.
+        ///   Looks up a localized string similar to Enter weight: .
         /// </summary>
         internal static string EnterWeight {
             get {
                 return ResourceManager.GetString("EnterWeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Q - exit.
+        /// </summary>
+        internal static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select an action:.
+        /// </summary>
+        internal static string SelectAction {
+            get {
+                return ResourceManager.GetString("SelectAction", resourceCulture);
             }
         }
     }

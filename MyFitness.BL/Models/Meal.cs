@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using Librarian.DAL.Entities.Base;
+using System.Runtime.Serialization;
 
 namespace MyFitness.BL.Models
 {
@@ -6,7 +7,7 @@ namespace MyFitness.BL.Models
     /// Meal.
     /// </summary>
     [DataContract]
-    public class Meal
+    public class Meal : NamedEntity
     {
         private double ProteinsOneGr => Proteins / 100;
 
@@ -15,12 +16,6 @@ namespace MyFitness.BL.Models
         private double CarbohydratesOneGr => Carbohydrates / 100;
 
         private double CaloriesOneGr => Calories / 100;
-
-        /// <summary>
-        /// Name.
-        /// </summary>
-        [DataMember(Name = "name")]
-        public string? Name { get; set; }
 
         /// <summary>
         /// Proteins per 100 grams of product.

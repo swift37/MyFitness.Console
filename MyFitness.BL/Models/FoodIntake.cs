@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using Librarian.DAL.Entities.Base;
+using System.Runtime.Serialization;
 
 namespace MyFitness.BL.Models
 {
@@ -6,7 +7,7 @@ namespace MyFitness.BL.Models
     /// Food intake.
     /// </summary>
     [DataContract]
-    public class FoodIntake
+    public class FoodIntake : Entity
     {
         /// <summary>
         /// Food intake foodIntakeMoment.

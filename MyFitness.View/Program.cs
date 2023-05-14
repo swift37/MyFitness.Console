@@ -46,11 +46,11 @@ namespace MyFitness.View
 
             while (true)
             {
-                Console.WriteLine("\nCurrent user: {0}", userController.CurrentUser);
-                Console.WriteLine("\nSelect an action:");
-                Console.WriteLine("F - add food intake");
-                Console.WriteLine("E - add exercise");
-                Console.WriteLine("Q - exit");
+                Console.WriteLine("\n" + rm.GetString("CurrentUser", culture) + userController.CurrentUser);
+                Console.WriteLine("\n" + rm.GetString("SelectAction", culture));
+                Console.WriteLine(rm.GetString("AddFoodIntake", culture));
+                Console.WriteLine(rm.GetString("AddExercise", culture));
+                Console.WriteLine(rm.GetString("Exit", culture));
                 var key = Console.ReadKey();
                 Console.Clear();
 
@@ -100,6 +100,8 @@ namespace MyFitness.View
 
             if (exerciseController.Exercises is null) throw new ArgumentNullException(nameof(exerciseController.Exercises));
 
+            Console.WriteLine();
+
             foreach (var item in exerciseController.Exercises)
             {
                 #region Item validation
@@ -123,6 +125,8 @@ namespace MyFitness.View
 
                 if (foodIntakeController.FoodIntake?.Meals is null) break;
 
+                Console.WriteLine();
+
                 foreach (var item in foodIntakeController.FoodIntake.Meals)
                 {
                     Console.WriteLine($"\t{item.Key} - {item.Value} gr.");
@@ -144,16 +148,16 @@ namespace MyFitness.View
             Console.WriteLine("Would you like to enter additional information for a meal? (Y/N)");
             if (Console.ReadKey().Key == ConsoleKey.Y)
             {
-                Console.Write("\nEnter the amount of calories in the meal:");
+                Console.Write("\nEnter the amount of calories in the meal: ");
                 var calories = GetParsedValue<double>("calories");
 
-                Console.Write("Enter the amount of proteins in the meal:");
+                Console.Write("Enter the amount of proteins in the meal: ");
                 var proteins = GetParsedValue<double>("proteins");
 
-                Console.Write("Enter the amount of fats in the meal:");
+                Console.Write("Enter the amount of fats in the meal: ");
                 var fats = GetParsedValue<double>("fats");
 
-                Console.Write("Enter the amount of carbohydrates in the meal:");
+                Console.Write("Enter the amount of carbohydrates in the meal: ");
                 var carbohydrates = GetParsedValue<double>("carbohydrates");
 
                 return (new Meal(mealName, calories, proteins, fats, carbohydrates), mealWeight);

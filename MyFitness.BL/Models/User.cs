@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using Librarian.DAL.Entities.Base;
+using System.Runtime.Serialization;
 
 namespace MyFitness.BL.Models
 {
@@ -6,14 +7,8 @@ namespace MyFitness.BL.Models
     /// User.
     /// </summary>
     [DataContract]
-    public class User
+    public class User : NamedEntity
     {
-        /// <summary>
-        /// Name.
-        /// </summary>
-        [DataMember(Name = "name")]
-        public string? Name { get; set; }
-
         /// <summary>
         /// Gender.
         /// </summary>

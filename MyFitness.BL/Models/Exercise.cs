@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Librarian.DAL.Entities.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -12,7 +13,7 @@ namespace MyFitness.BL.Models
     /// Physical exercise.
     /// </summary>
     [DataContract]
-    public class Exercise
+    public class Exercise : Entity
     {
         /// <summary>
         /// Physical exercise start.

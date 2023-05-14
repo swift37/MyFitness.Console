@@ -117,22 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddExercise" xml:space="preserve">
+    <value>E - add exercise</value>
+  </data>
+  <data name="AddFoodIntake" xml:space="preserve">
+    <value>F - add food intake</value>
+  </data>
   <data name="AppStarted" xml:space="preserve">
     <value>MyFitness was started!</value>
+  </data>
+  <data name="CurrentUser" xml:space="preserve">
+    <value>Current user: </value>
   </data>
   <data name="EnterDateOfBirth" xml:space="preserve">
     <value>Enter date of birth: </value>
   </data>
   <data name="EnterGender" xml:space="preserve">
-    <value>Enter gender:</value>
+    <value>Enter gender: </value>
   </data>
   <data name="EnterHeight" xml:space="preserve">
-    <value>Enter height:</value>
+    <value>Enter height: </value>
   </data>
   <data name="EnterUsername" xml:space="preserve">
     <value>Enter username: </value>
   </data>
   <data name="EnterWeight" xml:space="preserve">
-    <value>Enter weight:</value>
+    <value>Enter weight: </value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Q - exit</value>
+  </data>
+  <data name="SelectAction" xml:space="preserve">
+    <value>Select an action:</value>
   </data>
 </root>
