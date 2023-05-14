@@ -1,23 +1,16 @@
 ﻿using MyFitness.BL.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.Serialization.Json;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+using MyFitness.BL.Services.Interfaces;
 
 namespace MyFitness.BL.Controllers
 {
     /// <summary>
     /// User controller.
     /// </summary>
-    public class UserController : ControllerBase
+    public class UserController
     {
         private const string FILE_PATH = "users.json";
+
+        private readonly IDataIOService _dataService;
 
         /// <summary>
         /// Users list.
@@ -39,16 +32,20 @@ namespace MyFitness.BL.Controllers
         /// </summary>
         /// <param name="username"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public UserController(string? username)
+        public UserController(string? username, IDataIOService? dataService)
         {
             #region Username validation
 
             if (username is null) 
                 throw new ArgumentNullException(nameof(username));
+            if (dataService is null)
+                throw new ArgumentNullException(nameof(dataService));
             if (string.IsNullOrWhiteSpace(username) && username.Length <= 0 && username.Length > 16)
                 throw new ArgumentException("Incorrect username.", nameof(username));
 
             #endregion
+
+            _dataService = dataService;
 
             Users = LoadUsers();
 
@@ -82,7 +79,7 @@ namespace MyFitness.BL.Controllers
         /// <exception cref="FileLoadException"></exception>
         private List<User>? LoadUsers()
         {
-            return LoadData<User>(FILE_PATH)?.ToList() ?? new List<User>();
+            return _dataService.LoadData<User>(FILE_PATH)?.ToList() ?? new List<User>();
         }
 
         /// <summary>
@@ -91,7 +88,7 @@ namespace MyFitness.BL.Controllers
         public void SaveUsers()
         {
             if (Users is null) throw new ArgumentNullException(nameof(Users));
-            SaveData(FILE_PATH, Users);
+            _dataService.SaveData(FILE_PATH, Users);
         }
     }
 }

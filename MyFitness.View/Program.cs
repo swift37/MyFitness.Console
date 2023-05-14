@@ -1,21 +1,20 @@
 ﻿using MyFitness.BL.Controllers;
 using MyFitness.BL.Models;
-using MyFitness.View.Languages;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.SymbolStore;
+using MyFitness.BL.Services;
+using MyFitness.BL.Services.Interfaces;
 using System.Globalization;
 using System.Resources;
-using System.Runtime.CompilerServices;
-using System.Threading.Channels;
-using System.Transactions;
 
 namespace MyFitness.View
 {
     internal class Program
     {
+        private static IDataIOService? _dataService;
+
         static void Main(string[] args)
         {
+            _dataService = new SerializeService();
+
             var culture = CultureInfo.CurrentCulture;
             var rm = new ResourceManager("MyFitness.View.Languages.Lang", typeof(Program).Assembly);
 
@@ -24,7 +23,7 @@ namespace MyFitness.View
             Console.Write(rm.GetString("EnterUsername", culture));
             var username = Console.ReadLine();
             
-            var userController = new UserController(username); 
+            var userController = new UserController(username, _dataService); 
 
             if (userController.IsNewUser)
             {
@@ -77,7 +76,7 @@ namespace MyFitness.View
 
         private static void AddExercise(User? user)
         {
-            var exerciseController = new ExerciseController(user);
+            var exerciseController = new ExerciseController(user, _dataService);
 
             Console.WriteLine("\nEnter the name of activity: ");
             var activityName = Console.ReadLine();
@@ -116,7 +115,7 @@ namespace MyFitness.View
 
         private static void AddFoodIntake(User? user)
         {
-            var foodIntakeController = new FoodIntakeController(user, DateTime.UtcNow);
+            var foodIntakeController = new FoodIntakeController(user, DateTime.UtcNow, _dataService);
             while (true)
             {
                 var newMeal = EnterMeal();

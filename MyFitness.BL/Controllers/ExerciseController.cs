@@ -1,13 +1,9 @@
 ﻿using MyFitness.BL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MyFitness.BL.Services.Interfaces;
 
 namespace MyFitness.BL.Controllers
 {
-    public class ExerciseController : ControllerBase
+    public class ExerciseController
     {
         private const string ACTIVITIES_FILE_PATH = "activities.json";
         private const string EXERCISES_FILE_PATH = "exercises.json";
@@ -19,8 +15,15 @@ namespace MyFitness.BL.Controllers
 
         public List<Exercise>? Exercises { get; }
 
-        public ExerciseController(User? user, IDataIOService dataService)
+        public ExerciseController(User? user, IDataIOService? dataService)
         {
+            #region Data validation
+
+            if (dataService is null)
+                throw new ArgumentNullException(nameof(dataService));
+
+            #endregion
+
             _dataService = dataService;
 
             _user = user ?? throw new ArgumentNullException(nameof(user));
@@ -52,7 +55,7 @@ namespace MyFitness.BL.Controllers
         /// <returns>Activities list.</returns>
         private List<Activity>? LoadActivities()
         {
-            return LoadData<Activity>(ACTIVITIES_FILE_PATH)?.ToList() ?? new List<Activity>();
+            return _dataService.LoadData<Activity>(ACTIVITIES_FILE_PATH)?.ToList() ?? new List<Activity>();
         }
 
         /// <summary>
@@ -61,7 +64,7 @@ namespace MyFitness.BL.Controllers
         /// <returns>Exercises list.</returns>
         private List<Exercise>? LoadExercises()
         {
-            return LoadData<Exercise>(EXERCISES_FILE_PATH)?.ToList() ?? new List<Exercise>();
+            return _dataService.LoadData<Exercise>(EXERCISES_FILE_PATH)?.ToList() ?? new List<Exercise>();
         }
 
         /// <summary>
@@ -76,8 +79,8 @@ namespace MyFitness.BL.Controllers
 
             #endregion
 
-            SaveData(EXERCISES_FILE_PATH, Exercises);
-            SaveData(ACTIVITIES_FILE_PATH, Activities);
+            _dataService.SaveData(EXERCISES_FILE_PATH, Exercises);
+            _dataService.SaveData(ACTIVITIES_FILE_PATH, Activities);
         }
     }
 }
