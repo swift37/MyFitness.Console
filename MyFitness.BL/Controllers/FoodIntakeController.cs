@@ -5,9 +5,6 @@ namespace MyFitness.BL.Controllers
 {
     public class FoodIntakeController
     {
-        private const string MEALS_FILE_PATH = "meals.json";
-        private const string FOOD_INTAKES_FILE_PATH = "food_intakes.json";
-
         private readonly IDataIOService _dataService;
         private readonly User? _user;
 
@@ -22,7 +19,7 @@ namespace MyFitness.BL.Controllers
             #region Data validation
 
             if (dataService is null)
-                throw new ArgumentNullException(nameof(dataService)); 
+                throw new ArgumentNullException(nameof(dataService));
 
             #endregion
 
@@ -68,7 +65,7 @@ namespace MyFitness.BL.Controllers
         /// <returns>Meals list.</returns>
         private List<Meal>? LoadMeals()
         {
-            return _dataService.LoadData<Meal>(MEALS_FILE_PATH)?.ToList() ?? new List<Meal>();
+            return _dataService.LoadData<Meal>()?.ToList() ?? new List<Meal>();
         }
 
         /// <summary>
@@ -77,7 +74,7 @@ namespace MyFitness.BL.Controllers
         /// <returns>Food intakes list.</returns>
         private List<FoodIntake>? LoadFoodIntakes()
         {
-            return _dataService.LoadData<FoodIntake>(FOOD_INTAKES_FILE_PATH)?.ToList() ?? new List<FoodIntake>();
+            return _dataService.LoadData<FoodIntake>()?.ToList() ?? new List<FoodIntake>();
         }
 
         /// <summary>
@@ -92,8 +89,8 @@ namespace MyFitness.BL.Controllers
 
             #endregion
 
-            _dataService.SaveData(FOOD_INTAKES_FILE_PATH, FoodIntakes);
-            _dataService.SaveData(MEALS_FILE_PATH, Meals);
+            _dataService.SaveData(FoodIntakes);
+            _dataService.SaveData(Meals);
         }
     }
 }

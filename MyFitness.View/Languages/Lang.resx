@@ -129,6 +129,9 @@
   <data name="CurrentUser" xml:space="preserve">
     <value>Current user: </value>
   </data>
+  <data name="DelCurUser" xml:space="preserve">
+    <value>D - delete current user</value>
+  </data>
   <data name="EnterDateOfBirth" xml:space="preserve">
     <value>Enter date of birth: </value>
   </data>

@@ -1,4 +1,6 @@
-﻿namespace MyFitness.BL.Controllers.Tests
+﻿using MyFitness.BL.Services;
+
+namespace MyFitness.BL.Controllers.Tests
 {
     [TestClass()]
     public class UserControllerTests
@@ -7,16 +9,17 @@
         public void CreateUserDataTest()
         {
             // Arrange
+            var dataService = new DatabaseService();
             var username = Guid.NewGuid().ToString();
             var gender = "testtest";
             var dateOfBirth = DateTime.Now.AddYears(-20);
             var weight = 70;
             var height = 180;
-            var contr = new UserController(username);
+            var contr = new UserController(username, dataService);
 
             // Act
             contr.CreateUserData(gender, dateOfBirth, weight, height);
-            var contr2 = new UserController(username);
+            var contr2 = new UserController(username, dataService);
 
             // Assert
             Assert.AreEqual(username, contr2.CurrentUser?.Name);
@@ -31,10 +34,11 @@
         public void SaveUsersTest()
         {
             // Arrange
+            var dataService = new DatabaseService();
             var username = Guid.NewGuid().ToString();
 
             // Act
-            var contr = new UserController(username);
+            var contr = new UserController(username, dataService);
 
             // Assert
             Assert.AreEqual(username, contr.CurrentUser?.Name);

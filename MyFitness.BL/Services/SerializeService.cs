@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization.Json;
+using Librarian.DAL.Entities.Base;
 using MyFitness.BL.Services.Interfaces;
 
 namespace MyFitness.BL.Services
@@ -9,13 +10,14 @@ namespace MyFitness.BL.Services
     public class SerializeService : IDataIOService
     {
         /// <summary>
-        /// Serialize user data.
+        /// Deserialize user data.
         /// </summary>
-        /// <param name="filePath">Path to data file.</param>
-        /// <returns>Entities list.</returns>
-        public IEnumerable<T>? LoadData<T>(string filePath)
+        /// <returns>Entities enumerable.</returns>
+        public IEnumerable<T>? LoadData<T>() where T : Entity
         {
             var serializer = new DataContractJsonSerializer(typeof(IEnumerable<T>));
+
+            var filePath = $"{typeof(T).Name}.json";
 
             using (var stream = new FileStream(filePath, FileMode.OpenOrCreate))
             {
@@ -27,14 +29,14 @@ namespace MyFitness.BL.Services
         }
 
         /// <summary>
-        /// Deserialize user data.
+        /// Serialize user data.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="filePath">Path to save data file.</param>
-        /// <param name="entities">Entities list.</param>
-        public void SaveData<T>(string filePath, IEnumerable<T> entities)
+        /// <param name="entities">Entities enumerable.</param>
+        public void SaveData<T>(IEnumerable<T> entities) where T : Entity
         {
             var serializer = new DataContractJsonSerializer(typeof(IEnumerable<T>));
+
+            var filePath = $"{typeof(T).Name}.json";
 
             using (var stream = new FileStream(filePath, FileMode.OpenOrCreate))
             {

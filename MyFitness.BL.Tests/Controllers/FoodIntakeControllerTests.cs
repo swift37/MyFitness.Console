@@ -1,4 +1,5 @@
 ﻿using MyFitness.BL.Models;
+using MyFitness.BL.Services;
 
 namespace MyFitness.BL.Controllers.Tests
 {
@@ -9,11 +10,12 @@ namespace MyFitness.BL.Controllers.Tests
         public void AddTest()
         {
             // Arrange
+            var dataService = new DatabaseService();
             var username = Guid.NewGuid().ToString();
             var mealName = Guid.NewGuid().ToString();
             var rnd = new Random();
-            var userContr = new UserController(username);
-            var foodIntakeContr = new FoodIntakeController(userContr.CurrentUser, DateTime.UtcNow);
+            var userContr = new UserController(username, dataService);
+            var foodIntakeContr = new FoodIntakeController(userContr.CurrentUser, DateTime.UtcNow, dataService);
             var meal = new Meal(mealName, rnd.Next(500), rnd.Next(50), rnd.Next(50), rnd.Next(50));
 
             // Act

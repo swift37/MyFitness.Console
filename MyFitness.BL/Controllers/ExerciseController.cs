@@ -5,9 +5,6 @@ namespace MyFitness.BL.Controllers
 {
     public class ExerciseController
     {
-        private const string ACTIVITIES_FILE_PATH = "activities.json";
-        private const string EXERCISES_FILE_PATH = "exercises.json";
-
         private readonly IDataIOService _dataService;
         private readonly User? _user;
 
@@ -55,7 +52,7 @@ namespace MyFitness.BL.Controllers
         /// <returns>Activities list.</returns>
         private List<Activity>? LoadActivities()
         {
-            return _dataService.LoadData<Activity>(ACTIVITIES_FILE_PATH)?.ToList() ?? new List<Activity>();
+            return _dataService.LoadData<Activity>()?.ToList() ?? new List<Activity>();
         }
 
         /// <summary>
@@ -64,7 +61,7 @@ namespace MyFitness.BL.Controllers
         /// <returns>Exercises list.</returns>
         private List<Exercise>? LoadExercises()
         {
-            return _dataService.LoadData<Exercise>(EXERCISES_FILE_PATH)?.ToList() ?? new List<Exercise>();
+            return _dataService.LoadData<Exercise>()?.ToList() ?? new List<Exercise>();
         }
 
         /// <summary>
@@ -79,8 +76,8 @@ namespace MyFitness.BL.Controllers
 
             #endregion
 
-            _dataService.SaveData(EXERCISES_FILE_PATH, Exercises);
-            _dataService.SaveData(ACTIVITIES_FILE_PATH, Activities);
+            _dataService.SaveData(Exercises);
+            _dataService.SaveData(Activities);
         }
     }
 }

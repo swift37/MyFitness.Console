@@ -94,6 +94,11 @@ namespace MyFitness.BL.Models
         }
 
         /// <summary>
+        /// No parameterless constructor for EtityFramework. 
+        /// </summary>
+        public User() { }
+
+        /// <summary>
         /// Set user age.
         /// </summary>
         public void SetUserAge()

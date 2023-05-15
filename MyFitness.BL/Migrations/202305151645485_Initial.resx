@@ -117,40 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddExercise" xml:space="preserve">
-    <value>E - add exercise</value>
+  <data name="Target" xml:space="preserve">
+    <value>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</value>
   </data>
-  <data name="AddFoodIntake" xml:space="preserve">
-    <value>F - add food intake</value>
-  </data>
-  <data name="AppStarted" xml:space="preserve">
-    <value>MyFitness was started!</value>
-  </data>
-  <data name="CurrentUser" xml:space="preserve">
-    <value>Current user: </value>
-  </data>
-  <data name="DelCurUser" xml:space="preserve">
-    <value>D - delete current user</value>
-  </data>
-  <data name="EnterDateOfBirth" xml:space="preserve">
-    <value>Enter date of birth: </value>
-  </data>
-  <data name="EnterGender" xml:space="preserve">
-    <value>Enter gender: </value>
-  </data>
-  <data name="EnterHeight" xml:space="preserve">
-    <value>Enter height: </value>
-  </data>
-  <data name="EnterUsername" xml:space="preserve">
-    <value>Enter username: </value>
-  </data>
-  <data name="EnterWeight" xml:space="preserve">
-    <value>Enter weight: </value>
-  </data>
-  <data name="Exit" xml:space="preserve">
-    <value>Q - exit</value>
-  </data>
-  <data name="SelectAction" xml:space="preserve">
-    <value>Select an action:</value>
+  <data name="DefaultSchema" xml:space="preserve">
+    <value>dbo</value>
   </data>
 </root>

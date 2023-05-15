@@ -97,6 +97,15 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to D - delete current user.
+        /// </summary>
+        internal static string DelCurUser {
+            get {
+                return ResourceManager.GetString("DelCurUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter date of birth: .
         /// </summary>
         internal static string EnterDateOfBirth {

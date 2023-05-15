@@ -61,5 +61,11 @@ namespace MyFitness.BL.Models
             Activity = activity;
             User = user;
         }
+
+        /// <summary>
+        /// No parameterless constructor for EtityFramework. 
+        /// </summary>
+        public Exercise() { }
+
     }
 }

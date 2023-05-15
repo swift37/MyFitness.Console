@@ -40,6 +40,11 @@ namespace MyFitness.BL.Models
             CaloriesPerMinute = caloriesPerMinute;
         }
 
+        /// <summary>
+        /// No parameterless constructor for EtityFramework. 
+        /// </summary>
+        public Activity() { }
+
         public override string ToString()
         {
             return $"{Name}";

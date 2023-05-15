@@ -8,8 +8,6 @@ namespace MyFitness.BL.Controllers
     /// </summary>
     public class UserController
     {
-        private const string FILE_PATH = "users.json";
-
         private readonly IDataIOService _dataService;
 
         /// <summary>
@@ -61,7 +59,14 @@ namespace MyFitness.BL.Controllers
 
         public void CreateUserData(string? gender, DateTime dateOfBirth, double weight, double height)
         {
-            if (CurrentUser is null) throw new ArgumentNullException(nameof(CurrentUser));
+            #region Data validation
+
+            if (CurrentUser is null)
+                throw new ArgumentNullException(nameof(CurrentUser));
+            if (dateOfBirth < DateTime.Parse("01.01.1900") || dateOfBirth > DateTime.Now)
+                throw new InvalidDataException(nameof(dateOfBirth)); 
+
+            #endregion
 
             CurrentUser.Gender = new Gender(gender);
             CurrentUser.DateOfBirth = dateOfBirth;
@@ -79,7 +84,7 @@ namespace MyFitness.BL.Controllers
         /// <exception cref="FileLoadException"></exception>
         private List<User>? LoadUsers()
         {
-            return _dataService.LoadData<User>(FILE_PATH)?.ToList() ?? new List<User>();
+            return _dataService.LoadData<User>()?.ToList() ?? new List<User>();
         }
 
         /// <summary>
@@ -88,7 +93,7 @@ namespace MyFitness.BL.Controllers
         public void SaveUsers()
         {
             if (Users is null) throw new ArgumentNullException(nameof(Users));
-            _dataService.SaveData(FILE_PATH, Users);
+            _dataService.SaveData(Users);
         }
     }
 }

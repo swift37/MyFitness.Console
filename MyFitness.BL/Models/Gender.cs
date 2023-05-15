@@ -24,6 +24,11 @@ namespace MyFitness.BL.Models
             Name = name;
         }
 
+        /// <summary>
+        /// No parameterless constructor for EtityFramework. 
+        /// </summary>
+        public Gender() { }
+
         public override string ToString()
         {
             return $"{Name}";

@@ -41,6 +41,11 @@ namespace MyFitness.BL.Models
         }
 
         /// <summary>
+        /// No parameterless constructor for EtityFramework. 
+        /// </summary>
+        public FoodIntake() { }
+
+        /// <summary>
         /// Add new meal to food intake.
         /// </summary>
         /// <param name="food">Meal.</param>

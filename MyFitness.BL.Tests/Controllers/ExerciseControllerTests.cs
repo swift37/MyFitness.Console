@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyFitness.BL.Controllers;
 using MyFitness.BL.Models;
+using MyFitness.BL.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,12 @@ namespace MyFitness.BL.Controllers.Tests
         public void AddTest()
         {
             // Arrange
+            var dataService = new DatabaseService();
             var username = Guid.NewGuid().ToString();
             var mealName = Guid.NewGuid().ToString();
             var rnd = new Random();
-            var userContr = new UserController(username);
-            var exContr = new ExerciseController(userContr.CurrentUser);
+            var userContr = new UserController(username, dataService);
+            var exContr = new ExerciseController(userContr.CurrentUser, dataService);
             var activity = new Activity("Runing", 7);
 
             // Act

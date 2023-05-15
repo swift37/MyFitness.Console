@@ -65,6 +65,11 @@ namespace MyFitness.BL.Models
             Carbohydrates = carbohydrates;
         }
 
+        /// <summary>
+        /// No parameterless constructor for EtityFramework. 
+        /// </summary>
+        public Meal() { }
+
         public override string ToString()
         {
             return $"{Name}, {Calories} kcal. per 100 grams";
