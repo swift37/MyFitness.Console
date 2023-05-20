@@ -1,11 +1,5 @@
-﻿using MyFitness.BL.Controllers;
-using MyFitness.BL.Models;
-using System;
-using System.Collections.Generic;
+﻿using MyFitness.BL.Models;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyFitness.BL.Context
 {
@@ -16,6 +10,8 @@ namespace MyFitness.BL.Context
         public DbSet<Exercise>? Exercises { get; set; }
 
         public DbSet<FoodIntake>? FoodIntakes { get; set; }
+
+        public DbSet<FoodIntakeUnit>? FoodIntakeUnits { get; set; }
 
         public DbSet<Gender>? Genders { get; set; }
 

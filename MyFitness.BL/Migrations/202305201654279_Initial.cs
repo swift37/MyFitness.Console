@@ -71,6 +71,21 @@
                 .Index(t => t.User_Id);
             
             CreateTable(
+                "dbo.FoodIntakeUnits",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Weight = c.Double(nullable: false),
+                        Meal_Id = c.Int(),
+                        FoodIntake_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Meals", t => t.Meal_Id)
+                .ForeignKey("dbo.FoodIntakes", t => t.FoodIntake_Id)
+                .Index(t => t.Meal_Id)
+                .Index(t => t.FoodIntake_Id);
+            
+            CreateTable(
                 "dbo.Meals",
                 c => new
                     {
@@ -88,14 +103,19 @@
         public override void Down()
         {
             DropForeignKey("dbo.FoodIntakes", "User_Id", "dbo.Users");
+            DropForeignKey("dbo.FoodIntakeUnits", "FoodIntake_Id", "dbo.FoodIntakes");
+            DropForeignKey("dbo.FoodIntakeUnits", "Meal_Id", "dbo.Meals");
             DropForeignKey("dbo.Exercises", "User_Id", "dbo.Users");
             DropForeignKey("dbo.Users", "Gender_Id", "dbo.Genders");
             DropForeignKey("dbo.Exercises", "Activity_Id", "dbo.Activities");
+            DropIndex("dbo.FoodIntakeUnits", new[] { "FoodIntake_Id" });
+            DropIndex("dbo.FoodIntakeUnits", new[] { "Meal_Id" });
             DropIndex("dbo.FoodIntakes", new[] { "User_Id" });
             DropIndex("dbo.Users", new[] { "Gender_Id" });
             DropIndex("dbo.Exercises", new[] { "User_Id" });
             DropIndex("dbo.Exercises", new[] { "Activity_Id" });
             DropTable("dbo.Meals");
+            DropTable("dbo.FoodIntakeUnits");
             DropTable("dbo.FoodIntakes");
             DropTable("dbo.Genders");
             DropTable("dbo.Users");

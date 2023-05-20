@@ -11,6 +11,13 @@ namespace MyFitness.BL.Services
     /// </summary>
     public class DatabaseService : IDataIOService
     {
+        private readonly FitnessDb _db;
+
+        public DatabaseService()
+        {
+            _db = new FitnessDb();
+        }
+
         /// <summary>
         /// Load user data.
         /// </summary>
@@ -18,35 +25,30 @@ namespace MyFitness.BL.Services
         /// <returns>Entities enumerable.</returns>
         public IEnumerable<T>? LoadData<T>() where T : Entity
         {
-            using (var db = new FitnessDb())
-            {
-                return db.Set<T>().ToList();
-            }
+            return _db.Set<T>().ToArray();
+        }
+
+        public void SaveData<T>(IEnumerable<T>? entities) where T : Entity
+        {
+            if (entities is null) throw new ArgumentNullException(nameof(entities));
+
+            var entity = entities.LastOrDefault();
+            if (entity is null) return; 
+
+            _db.Entry(entity).State = EntityState.Added;
+            _db.SaveChanges();
         }
 
         /// <summary>
-        /// Save user data.
+        /// Remove entity.
         /// </summary>
         /// <typeparam name="T">T : Entity.</typeparam>
-        /// <param name="entities">Entities enumerable.</param>
-        public void SaveData<T>(IEnumerable<T> entities) where T : Entity
+        /// <param name="id">Entity id.</param>
+        public void Remove<T>(int id) where T : Entity, new()
         {
-            using (var db = new FitnessDb())
-            {
-                db.Set<T>().AddRange(entities);
-                db.SaveChanges();
-            }
+            var entity = _db.Set<T>().Local.FirstOrDefault(entity => entity.Id == id) ?? new T { Id = id };
+            _db.Set<T>().Remove(entity);
+            _db.SaveChanges();
         }
-
-        //public void Remove<T>(int id) where T : Entity, new()
-        //{
-        //    using (var db = new FitnessDb())
-        //    {
-        //        var entity = db.Set<T>().Local.FirstOrDefault(entity => entity.Id == id) ?? new T { Id = id };
-
-        //        db.Remove(entity);
-        //        db.SaveChanges();
-        //    }
-        //}
     }
 }

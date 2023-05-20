@@ -118,10 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddExercise" xml:space="preserve">
-    <value>E - add exercise</value>
+    <value>E - Add exercise</value>
   </data>
   <data name="AddFoodIntake" xml:space="preserve">
-    <value>F - add food intake</value>
+    <value>F - Add food intake</value>
+  </data>
+  <data name="AllActivities" xml:space="preserve">
+    <value>A - List of all existing activities</value>
+  </data>
+  <data name="AllMeals" xml:space="preserve">
+    <value>M - List of all existing meals</value>
   </data>
   <data name="AppStarted" xml:space="preserve">
     <value>MyFitness was started!</value>
@@ -130,7 +136,7 @@
     <value>Current user: </value>
   </data>
   <data name="DelCurUser" xml:space="preserve">
-    <value>D - delete current user</value>
+    <value>D - Delete current user</value>
   </data>
   <data name="EnterDateOfBirth" xml:space="preserve">
     <value>Enter date of birth: </value>
@@ -148,9 +154,15 @@
     <value>Enter weight: </value>
   </data>
   <data name="Exit" xml:space="preserve">
-    <value>Q - exit</value>
+    <value>Q - Exit</value>
   </data>
   <data name="SelectAction" xml:space="preserve">
     <value>Select an action:</value>
+  </data>
+  <data name="UserExercises" xml:space="preserve">
+    <value>X - List of all your exercises</value>
+  </data>
+  <data name="UserFoodIntakes" xml:space="preserve">
+    <value>I - List of all your food intakes</value>
   </data>
 </root>

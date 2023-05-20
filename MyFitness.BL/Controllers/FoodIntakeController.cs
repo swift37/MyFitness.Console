@@ -1,9 +1,10 @@
 ﻿using MyFitness.BL.Models;
+using MyFitness.BL.Services;
 using MyFitness.BL.Services.Interfaces;
 
 namespace MyFitness.BL.Controllers
 {
-    public class FoodIntakeController
+    public class FoodIntakeController : IDisposable
     {
         private readonly IDataIOService _dataService;
         private readonly User? _user;
@@ -55,8 +56,6 @@ namespace MyFitness.BL.Controllers
                 FoodIntakes.Add(FoodIntake);
 
             FoodIntake.Add(meal, weight);
-
-            Save();
         }
 
         /// <summary>
@@ -80,17 +79,15 @@ namespace MyFitness.BL.Controllers
         /// <summary>
         /// Save food intakes and meals.
         /// </summary>
-        private void Save()
+        public void Save()
         {
-            #region Data validation
-
-            if (FoodIntakes is null) throw new ArgumentNullException(nameof(FoodIntakes)); 
-            if (Meals is null) throw new ArgumentNullException(nameof(Meals));
-
-            #endregion
-
             _dataService.SaveData(FoodIntakes);
-            _dataService.SaveData(Meals);
+            if (!(_dataService is DatabaseService)) _dataService.SaveData(Meals);
+        }
+
+        public void Dispose() 
+        {
+            GC.SuppressFinalize(this);
         }
     }
 }

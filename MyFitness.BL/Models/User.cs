@@ -33,7 +33,6 @@ namespace MyFitness.BL.Models
         [DataMember(Name = "height")]
         public double Height { get; set; }
 
-
         /// <summary>
         /// Age.
         /// </summary>

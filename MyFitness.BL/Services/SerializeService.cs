@@ -29,11 +29,13 @@ namespace MyFitness.BL.Services
         }
 
         /// <summary>
-        /// Serialize user data.
+        /// Serialize users data.
         /// </summary>
         /// <param name="entities">Entities enumerable.</param>
-        public void SaveData<T>(IEnumerable<T> entities) where T : Entity
+        public void SaveData<T>(IEnumerable<T>? entities) where T : Entity
         {
+            if (entities is null) return;
+
             var serializer = new DataContractJsonSerializer(typeof(IEnumerable<T>));
 
             var filePath = $"{typeof(T).Name}.json";
@@ -42,6 +44,24 @@ namespace MyFitness.BL.Services
             {
                 serializer.WriteObject(stream, entities);
             }
+        }
+
+        /// <summary>
+        /// Remove entity.
+        /// </summary>
+        /// <typeparam name="T">T : Entity</typeparam>
+        /// <param name="id">Entity id.</param>
+        public void Remove<T>(int id) where T : Entity, new()
+        {
+            var entities = LoadData<T>()?.ToList();
+            if (entities is null) return;
+
+            var entity = entities.FirstOrDefault(entity => entity.Id == id) ?? new T { Id = id };
+            entities.Remove(entity);
+
+            var filePath = $"{typeof(T).Name}.json";
+            File.Delete(filePath);
+            SaveData(entities);
         }
     }
 }

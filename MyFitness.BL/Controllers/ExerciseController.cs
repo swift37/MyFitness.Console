@@ -1,9 +1,11 @@
-﻿using MyFitness.BL.Models;
+﻿using MyFitness.BL.Context;
+using MyFitness.BL.Models;
+using MyFitness.BL.Services;
 using MyFitness.BL.Services.Interfaces;
 
 namespace MyFitness.BL.Controllers
 {
-    public class ExerciseController
+    public class ExerciseController : IDisposable
     {
         private readonly IDataIOService _dataService;
         private readonly User? _user;
@@ -39,9 +41,10 @@ namespace MyFitness.BL.Controllers
 
             #endregion
 
-            if (Activities.SingleOrDefault(a => a.Name == a.Name) is null) Activities.Add(activity);
+            if (Activities.SingleOrDefault(a => a.Name == activity.Name) is null) Activities.Add(activity);
 
-            Exercises.Add(new Exercise(start, finish, activity, _user));
+            var newExercise = new Exercise(start, finish, activity, _user);
+            Exercises.Add(newExercise);
 
             Save();
         }
@@ -69,15 +72,13 @@ namespace MyFitness.BL.Controllers
         /// </summary>
         private void Save()
         {
-            #region Data validation
-
-            if (Exercises is null) throw new ArgumentNullException(nameof(Exercises));
-            if (Activities is null) throw new ArgumentNullException(nameof(Activities));
-
-            #endregion
-
             _dataService.SaveData(Exercises);
-            _dataService.SaveData(Activities);
+            if (!(_dataService is DatabaseService)) _dataService.SaveData(Activities);
+        }
+
+        public void Dispose() 
+        {
+            GC.SuppressFinalize(this);
         }
     }
 }

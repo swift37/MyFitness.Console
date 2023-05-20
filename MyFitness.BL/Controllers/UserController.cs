@@ -1,4 +1,5 @@
 ﻿using MyFitness.BL.Models;
+using MyFitness.BL.Services;
 using MyFitness.BL.Services.Interfaces;
 
 namespace MyFitness.BL.Controllers
@@ -6,9 +7,14 @@ namespace MyFitness.BL.Controllers
     /// <summary>
     /// User controller.
     /// </summary>
-    public class UserController
+    public class UserController : IDisposable
     {
         private readonly IDataIOService _dataService;
+
+        /// <summary>
+        /// Genders collection.
+        /// </summary>
+        private List<Gender> _genders;
 
         /// <summary>
         /// Users list.
@@ -44,7 +50,7 @@ namespace MyFitness.BL.Controllers
             #endregion
 
             _dataService = dataService;
-
+            _genders = LoadGenders();
             Users = LoadUsers();
 
             CurrentUser = Users?.SingleOrDefault(user => user.Name == username);
@@ -63,18 +69,30 @@ namespace MyFitness.BL.Controllers
 
             if (CurrentUser is null)
                 throw new ArgumentNullException(nameof(CurrentUser));
+            if (Users is null)
+                throw new ArgumentNullException(nameof(Users));
             if (dateOfBirth < DateTime.Parse("01.01.1900") || dateOfBirth > DateTime.Now)
-                throw new InvalidDataException(nameof(dateOfBirth)); 
+                throw new InvalidDataException(nameof(dateOfBirth));
 
             #endregion
 
-            CurrentUser.Gender = new Gender(gender);
+            CurrentUser.Gender = _genders.SingleOrDefault(g => g.Name == gender) ?? new Gender(gender);
             CurrentUser.DateOfBirth = dateOfBirth;
             CurrentUser.Weight = weight;
             CurrentUser.Height = height;
             CurrentUser.SetUserAge();
-            Users?.Add(CurrentUser);
-            SaveUsers();
+            Users.Add(CurrentUser);
+            SaveData();
+        }
+
+        public void DeleteCurrentUser()
+        {
+            if (CurrentUser is null) return;
+
+            var removableUser = Users?.SingleOrDefault(user => user.Name == CurrentUser.Name);
+            if (removableUser is null) return;
+
+            _dataService.Remove<User>(removableUser.Id);
         }
 
         /// <summary>
@@ -88,12 +106,27 @@ namespace MyFitness.BL.Controllers
         }
 
         /// <summary>
+        /// Load genders.
+        /// </summary>
+        /// <returns>Users list.</returns>
+        /// <exception cref="FileLoadException"></exception>
+        private List<Gender> LoadGenders()
+        {
+            return _dataService.LoadData<Gender>()?.ToList() ?? new List<Gender>();
+        }
+
+        /// <summary>
         /// Save user data.
         /// </summary>
-        public void SaveUsers()
+        public void SaveData()
         {
-            if (Users is null) throw new ArgumentNullException(nameof(Users));
             _dataService.SaveData(Users);
+            if (!(_dataService is DatabaseService)) _dataService.SaveData(_genders);
+        }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
         }
     }
 }

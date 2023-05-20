@@ -19,7 +19,7 @@ namespace MyFitness.BL.Models
         /// Foods and foods weight list.
         /// </summary>
         [DataMember(Name = "meals")]
-        public Dictionary<Meal, double>? Meals { get; set; }
+        public ICollection<FoodIntakeUnit> Meals { get; set; } = new HashSet<FoodIntakeUnit>();
 
         /// <summary>
         /// User.
@@ -37,7 +37,6 @@ namespace MyFitness.BL.Models
         {
             User = user ?? throw new ArgumentNullException(nameof(user)); 
             Moment = foodIntakeMoment;
-            Meals = new Dictionary<Meal, double>();
         }
 
         /// <summary>
@@ -60,12 +59,12 @@ namespace MyFitness.BL.Models
 
             #endregion
 
-            var product = Meals.Keys.FirstOrDefault(m => m.Name.Equals(meal.Name));
+            var product = Meals.FirstOrDefault(m => m.Meal?.Name == meal.Name );
 
             if (product is null)
-                Meals.Add(meal, weight);
+                Meals.Add(new FoodIntakeUnit(meal, weight));
             else
-                Meals[product] += weight;
+                product.Weight += weight;
         }
     }
 }

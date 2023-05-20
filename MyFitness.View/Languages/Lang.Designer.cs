@@ -61,7 +61,7 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to E - add exercise.
+        ///   Looks up a localized string similar to E - Add exercise.
         /// </summary>
         internal static string AddExercise {
             get {
@@ -70,11 +70,29 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to F - add food intake.
+        ///   Looks up a localized string similar to F - Add food intake.
         /// </summary>
         internal static string AddFoodIntake {
             get {
                 return ResourceManager.GetString("AddFoodIntake", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A - List of all existing activities.
+        /// </summary>
+        internal static string AllActivities {
+            get {
+                return ResourceManager.GetString("AllActivities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M - List of all existing meals.
+        /// </summary>
+        internal static string AllMeals {
+            get {
+                return ResourceManager.GetString("AllMeals", resourceCulture);
             }
         }
         
@@ -97,7 +115,7 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to D - delete current user.
+        ///   Looks up a localized string similar to D - Delete current user.
         /// </summary>
         internal static string DelCurUser {
             get {
@@ -151,7 +169,7 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Q - exit.
+        ///   Looks up a localized string similar to Q - Exit.
         /// </summary>
         internal static string Exit {
             get {
@@ -165,6 +183,24 @@ namespace MyFitness.View.Languages {
         internal static string SelectAction {
             get {
                 return ResourceManager.GetString("SelectAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to X - List of all your exercises.
+        /// </summary>
+        internal static string UserExercises {
+            get {
+                return ResourceManager.GetString("UserExercises", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I - List of all your food intakes.
+        /// </summary>
+        internal static string UserFoodIntakes {
+            get {
+                return ResourceManager.GetString("UserFoodIntakes", resourceCulture);
             }
         }
     }
