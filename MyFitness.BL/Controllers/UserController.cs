@@ -63,6 +63,13 @@ namespace MyFitness.BL.Controllers
                 
         }
 
+        /// <summary>
+        /// Create user data for new user.
+        /// </summary>
+        /// <param name="gender">Gender.</param>
+        /// <param name="dateOfBirth">Date of birth.</param>
+        /// <param name="weight">Weightt.</param>
+        /// <param name="height">Height.</param>
         public void CreateUserData(string? gender, DateTime dateOfBirth, double weight, double height)
         {
             #region Data validation
@@ -76,6 +83,8 @@ namespace MyFitness.BL.Controllers
 
             #endregion
 
+            var newId = Users.LastOrDefault()?.Id ?? 0;
+            CurrentUser.Id = ++newId;
             CurrentUser.Gender = _genders.SingleOrDefault(g => g.Name == gender) ?? new Gender(gender);
             CurrentUser.DateOfBirth = dateOfBirth;
             CurrentUser.Weight = weight;
@@ -89,10 +98,10 @@ namespace MyFitness.BL.Controllers
         {
             if (CurrentUser is null) return;
 
-            var removableUser = Users?.SingleOrDefault(user => user.Name == CurrentUser.Name);
-            if (removableUser is null) return;
+            //var removableUser = Users?.SingleOrDefault(user => user.Name == CurrentUser.Name);
+            //if (removableUser is null) return;
 
-            _dataService.Remove<User>(removableUser.Id);
+            _dataService.Remove<User>(CurrentUser.Id);
         }
 
         /// <summary>

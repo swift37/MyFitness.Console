@@ -7,7 +7,7 @@ namespace MyFitness.BL.Services
     /// <summary>
     /// Serialize service.
     /// </summary>
-    public class SerializeService : IDataIOService
+    public class SerializationService : IDataIOService
     {
         /// <summary>
         /// Deserialize user data.

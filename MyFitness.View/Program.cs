@@ -13,7 +13,7 @@ namespace MyFitness.View
 
         static void Main(string[] args)
         {
-            _dataService = new SerializeService();
+            _dataService = new SerializationService();
 
             var culture = CultureInfo.CurrentCulture;
             var rm = new ResourceManager("MyFitness.View.Languages.Lang", typeof(Program).Assembly);
@@ -54,7 +54,7 @@ namespace MyFitness.View
                 Console.WriteLine(rm.GetString("UserExercises", culture));
                 Console.WriteLine(rm.GetString("AllMeals", culture));
                 Console.WriteLine(rm.GetString("AllActivities", culture));
-                //Console.WriteLine(rm.GetString("DelCurUser", culture));
+                Console.WriteLine(rm.GetString("DelCurUser", culture));
                 Console.WriteLine(rm.GetString("Exit", culture));
                 var key = Console.ReadKey();
                 Console.Clear();
