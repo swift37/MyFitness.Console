@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddAnotherMeal?" xml:space="preserve">
+    <value>Would you like to add another meal?</value>
+  </data>
   <data name="AddExercise" xml:space="preserve">
     <value>E - Add exercise</value>
   </data>
   <data name="AddFoodIntake" xml:space="preserve">
     <value>F - Add food intake</value>
+  </data>
+  <data name="AddInform?" xml:space="preserve">
+    <value>Would you like to enter additional information for a meal?</value>
   </data>
   <data name="AllActivities" xml:space="preserve">
     <value>A - List of all existing activities</value>
@@ -129,23 +135,77 @@
   <data name="AllMeals" xml:space="preserve">
     <value>M - List of all existing meals</value>
   </data>
+  <data name="AmountBurnedKcal" xml:space="preserve">
+    <value>Amount of kilocalories burned: </value>
+  </data>
   <data name="AppStarted" xml:space="preserve">
     <value>MyFitness was started!</value>
+  </data>
+  <data name="Carbs" xml:space="preserve">
+    <value>Carbohydrates: </value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Press Y to confirm or N to refuse</value>
+  </data>
+  <data name="crbs" xml:space="preserve">
+    <value>carbohydrates</value>
   </data>
   <data name="CurrentUser" xml:space="preserve">
     <value>Current user: </value>
   </data>
+  <data name="dateOfBirth" xml:space="preserve">
+    <value>date of birth</value>
+  </data>
   <data name="DelCurUser" xml:space="preserve">
     <value>D - Delete current user</value>
   </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration: </value>
+  </data>
+  <data name="endExTime" xml:space="preserve">
+    <value>end time of the exercise</value>
+  </data>
+  <data name="EnterActivityName" xml:space="preserve">
+    <value>Enter the name of activity: </value>
+  </data>
+  <data name="EnterCarbs" xml:space="preserve">
+    <value>Enter the amount of carbohydrates per 100 g. of the meal (just a number in grams): </value>
+  </data>
   <data name="EnterDateOfBirth" xml:space="preserve">
-    <value>Enter date of birth: </value>
+    <value>Enter date of birth (min. 12 y.o.): </value>
+  </data>
+  <data name="EnterExEndTime" xml:space="preserve">
+    <value>Enter the end time of the exercise (foramt dd.MM.yyyy HH:mm or only HH.mm): </value>
+  </data>
+  <data name="EnterExStartTime" xml:space="preserve">
+    <value>Enter the start time of the exercise (foramt dd.MM.yyyy HH:mm or only HH.mm): </value>
+  </data>
+  <data name="EnterFats" xml:space="preserve">
+    <value>Enter the amount of fats per 100 g. of the meal (just a number in grams): </value>
   </data>
   <data name="EnterGender" xml:space="preserve">
     <value>Enter gender: </value>
   </data>
   <data name="EnterHeight" xml:space="preserve">
     <value>Enter height: </value>
+  </data>
+  <data name="EnterKcal" xml:space="preserve">
+    <value>Enter the amount of kilocalories per 100 g. of the meal (just a number): </value>
+  </data>
+  <data name="EnterKcalPerHour" xml:space="preserve">
+    <value>Enter the number of kilocalories burned per hour: </value>
+  </data>
+  <data name="EnterMealName" xml:space="preserve">
+    <value>Enter meal name: </value>
+  </data>
+  <data name="EnterMealWeight" xml:space="preserve">
+    <value>Enter meal weight: </value>
+  </data>
+  <data name="EnterProductVolume" xml:space="preserve">
+    <value>Enter product volume: </value>
+  </data>
+  <data name="EnterProteins" xml:space="preserve">
+    <value>Enter the amount of proteins per 100 g. of the meal (just a number in grams): </value>
   </data>
   <data name="EnterUsername" xml:space="preserve">
     <value>Enter username: </value>
@@ -156,13 +216,70 @@
   <data name="Exit" xml:space="preserve">
     <value>Q - Exit</value>
   </data>
+  <data name="Fats" xml:space="preserve">
+    <value>Fats: </value>
+  </data>
+  <data name="fts" xml:space="preserve">
+    <value>fats</value>
+  </data>
+  <data name="gr" xml:space="preserve">
+    <value>gr.</value>
+  </data>
+  <data name="height" xml:space="preserve">
+    <value>height</value>
+  </data>
+  <data name="Incorrect" xml:space="preserve">
+    <value>Incorrect</value>
+  </data>
+  <data name="IsLiquid?" xml:space="preserve">
+    <value>Is the product a liquid?</value>
+  </data>
+  <data name="kcalPerHour" xml:space="preserve">
+    <value>kilocalories per hour</value>
+  </data>
+  <data name="kcals" xml:space="preserve">
+    <value>kilocalories</value>
+  </data>
+  <data name="mealWeight" xml:space="preserve">
+    <value>meal weight</value>
+  </data>
+  <data name="ml" xml:space="preserve">
+    <value>ml.</value>
+  </data>
+  <data name="PleaseTryAgain" xml:space="preserve">
+    <value>Please, try again</value>
+  </data>
+  <data name="productVolume" xml:space="preserve">
+    <value>product volume</value>
+  </data>
+  <data name="Proteins" xml:space="preserve">
+    <value>Proteins: </value>
+  </data>
+  <data name="prts" xml:space="preserve">
+    <value>proteins</value>
+  </data>
+  <data name="ReturnMainMenu" xml:space="preserve">
+    <value>Press any key to return to the main menu</value>
+  </data>
   <data name="SelectAction" xml:space="preserve">
     <value>Select an action:</value>
+  </data>
+  <data name="startExTime" xml:space="preserve">
+    <value>start time of the exercise</value>
+  </data>
+  <data name="TotalKcalCurFoodIntake" xml:space="preserve">
+    <value>Total calories for the current food intake: </value>
+  </data>
+  <data name="TotalKcalFoodIntake" xml:space="preserve">
+    <value>Total calories per food intake: </value>
   </data>
   <data name="UserExercises" xml:space="preserve">
     <value>X - List of all your exercises</value>
   </data>
   <data name="UserFoodIntakes" xml:space="preserve">
     <value>I - List of all your food intakes</value>
+  </data>
+  <data name="weight" xml:space="preserve">
+    <value>weight</value>
   </data>
 </root>

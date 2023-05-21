@@ -22,6 +22,24 @@ namespace MyFitness.BL.Models
         public ICollection<FoodIntakeUnit> Meals { get; set; } = new HashSet<FoodIntakeUnit>();
 
         /// <summary>
+        /// Total number of kilocalories per food intake.
+        /// </summary>
+        [DataMember(Name = "total_kilocalories")]
+        public double TotalKilocalories 
+        { 
+            get
+            {
+                double totalKcal = 0;
+                foreach (var foodIntakeUnit in Meals)
+                {
+                    totalKcal += foodIntakeUnit.TotalKilocalories;
+                }
+                return totalKcal;
+            }
+            set { } 
+        }
+
+        /// <summary>
         /// User.
         /// </summary>
         [DataMember(Name = "user")]

@@ -89,7 +89,6 @@ namespace MyFitness.BL.Controllers
             CurrentUser.DateOfBirth = dateOfBirth;
             CurrentUser.Weight = weight;
             CurrentUser.Height = height;
-            CurrentUser.SetUserAge();
             Users.Add(CurrentUser);
             SaveData();
         }

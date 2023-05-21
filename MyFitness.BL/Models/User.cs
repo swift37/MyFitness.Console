@@ -37,7 +37,26 @@ namespace MyFitness.BL.Models
         /// Age.
         /// </summary>
         [DataMember(Name = "age")]
-        public int Age { get; set; }
+        public int Age 
+        { 
+            get
+            {
+                var age = DateTime.Now.Year - DateOfBirth.Year;
+                if (DateTime.Now < DateOfBirth.AddYears(age)) age--;
+                return age;
+            }
+            set { } 
+        }
+
+        /// <summary>
+        /// Age.
+        /// </summary>
+        [DataMember(Name = "bmi")]
+        public double BMI 
+        {
+            get => Weight / (Height / 100 * (Height / 100)); 
+            set { } 
+        }
 
         /// <summary>
         /// Create new user.
@@ -71,7 +90,6 @@ namespace MyFitness.BL.Models
             DateOfBirth = dateOfBirth;
             Weight = weight;
             Height = height;
-            SetUserAge();
         }
 
         /// <summary>
@@ -96,16 +114,6 @@ namespace MyFitness.BL.Models
         /// No parameterless constructor for EtityFramework. 
         /// </summary>
         public User() { }
-
-        /// <summary>
-        /// Set user age.
-        /// </summary>
-        public void SetUserAge()
-        {
-            var age = DateTime.Now.Year - DateOfBirth.Year;
-            if (DateTime.Now < DateOfBirth.AddYears(age)) age--;
-            Age = age;
-        }
 
         public override string ToString()
         {

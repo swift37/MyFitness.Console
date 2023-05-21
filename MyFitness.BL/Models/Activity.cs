@@ -10,29 +10,29 @@ namespace MyFitness.BL.Models
     public class Activity : NamedEntity
     {
         /// <summary>
-        /// Calories per minut.
+        /// Kilocalories per minut.
         /// </summary>
-        [DataMember(Name = "calories_per_minute")]
-        public double CaloriesPerMinute { get; set; }
+        [DataMember(Name = "calories_per_hour")]
+        public double CaloriesPerHour { get; set; }
 
         /// <summary>
         /// Create new physical activity.
         /// </summary>
         /// <param name="name">Physical activity name.</param>
-        /// <param name="caloriesPerMinute">Calories per minut.</param>
+        /// <param name="caloriesPerHour">Kilocalories per hour.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="InvalidDataException"></exception>
-        public Activity(string? name, double caloriesPerMinute)
+        public Activity(string? name, double caloriesPerHour)
         {
             #region Data validation
 
             if (name is null) throw new ArgumentNullException(nameof(name));
-            if (caloriesPerMinute <= 0) throw new InvalidDataException(nameof(caloriesPerMinute)); 
+            if (caloriesPerHour <= 0) throw new InvalidDataException(nameof(caloriesPerHour)); 
 
             #endregion
 
             Name = name;
-            CaloriesPerMinute = caloriesPerMinute;
+            CaloriesPerHour = caloriesPerHour;
         }
 
         /// <summary>

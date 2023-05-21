@@ -22,6 +22,26 @@ namespace MyFitness.BL.Models
         public DateTime Finish { get; set; }
 
         /// <summary>
+        /// Physical exercise duration.
+        /// </summary>
+        [DataMember(Name = "duration")]
+        public TimeSpan Duration
+        {
+            get => (Finish - Start).Duration();
+            set { }
+        }
+
+        /// <summary>
+        /// Amount of calories burned.
+        /// </summary>
+        [DataMember(Name = "burned_calories")]
+        public double BurnedCalories 
+        {
+            get => ((Activity?.CaloriesPerHour ?? 0) / 60) * Duration.TotalMinutes; 
+            set { } 
+        }
+
+        /// <summary>
         /// Type of physical activity.
         /// </summary>
         [DataMember(Name = "activity")]
