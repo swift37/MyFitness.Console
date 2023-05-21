@@ -223,7 +223,7 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the amount of carbohydrates per 100 g. of the meal (just a number in grams): .
+        ///   Looks up a localized string similar to Enter the amount of carbohydrates .
         /// </summary>
         internal static string EnterCarbs {
             get {
@@ -241,7 +241,7 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the end time of the exercise (foramt dd.MM.yyyy HH:mm or only HH.mm): .
+        ///   Looks up a localized string similar to Enter the end time of the exercise (format dd.MM.yyyy HH:mm or only HH.mm): .
         /// </summary>
         internal static string EnterExEndTime {
             get {
@@ -250,7 +250,7 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the start time of the exercise (foramt dd.MM.yyyy HH:mm or only HH.mm): .
+        ///   Looks up a localized string similar to Enter the start time of the exercise (format dd.MM.yyyy HH:mm or only HH.mm): .
         /// </summary>
         internal static string EnterExStartTime {
             get {
@@ -259,7 +259,7 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the amount of fats per 100 g. of the meal (just a number in grams): .
+        ///   Looks up a localized string similar to Enter the amount of fats .
         /// </summary>
         internal static string EnterFats {
             get {
@@ -277,7 +277,7 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter height: .
+        ///   Looks up a localized string similar to Enter height (in centimeters): .
         /// </summary>
         internal static string EnterHeight {
             get {
@@ -286,7 +286,7 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the amount of kilocalories per 100 g. of the meal (just a number): .
+        ///   Looks up a localized string similar to Enter the amount of kilocalories .
         /// </summary>
         internal static string EnterKcal {
             get {
@@ -331,7 +331,7 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the amount of proteins per 100 g. of the meal (just a number in grams): .
+        ///   Looks up a localized string similar to Enter the amount of proteins  .
         /// </summary>
         internal static string EnterProteins {
             get {
@@ -349,7 +349,7 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter weight: .
+        ///   Looks up a localized string similar to Enter weight (in kilograms): .
         /// </summary>
         internal static string EnterWeight {
             get {
@@ -385,11 +385,11 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to gr..
+        ///   Looks up a localized string similar to g.
         /// </summary>
-        internal static string gr {
+        internal static string g {
             get {
-                return ResourceManager.GetString("gr", resourceCulture);
+                return ResourceManager.GetString("g", resourceCulture);
             }
         }
         
@@ -448,11 +448,29 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ml..
+        ///   Looks up a localized string similar to ml.
         /// </summary>
         internal static string ml {
             get {
                 return ResourceManager.GetString("ml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to per 100 g of the meal (just a number in grams).
+        /// </summary>
+        internal static string Per100gMeal {
+            get {
+                return ResourceManager.GetString("Per100gMeal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to per 100 ml of the product (just a number in grams).
+        /// </summary>
+        internal static string Per100mlProduct {
+            get {
+                return ResourceManager.GetString("Per100mlProduct", resourceCulture);
             }
         }
         
@@ -538,7 +556,7 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Total calories for the current food intake: .
+        ///   Looks up a localized string similar to Total kilocalories for the current food intake: .
         /// </summary>
         internal static string TotalKcalCurFoodIntake {
             get {
@@ -547,7 +565,7 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Total calories per food intake: .
+        ///   Looks up a localized string similar to Total kilocalories per food intake: .
         /// </summary>
         internal static string TotalKcalFoodIntake {
             get {

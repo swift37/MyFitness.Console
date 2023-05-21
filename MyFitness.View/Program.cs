@@ -82,15 +82,18 @@ namespace MyFitness.View
                         {
                             if(foodIntake.User is null) continue;
                             if (foodIntake.User.Id != userController.CurrentUser?.Id) continue; 
-                            Console.WriteLine($"{foodIntake.Moment}" +
-                                _rm?.GetString("TotalKcalFoodIntake", _culture) + $"{foodIntake.TotalKilocalories}");
+                            Console.WriteLine($"{foodIntake.Moment}\n\t" +
+                                _rm?.GetString("TotalKcalFoodIntake", _culture) + $"{foodIntake.TotalKilocalories}" +
+                            _rm?.GetString("kcal", _culture));
                             if (foodIntake.Meals is null) continue;
                             foreach (var FoodIntakeUnit in foodIntake.Meals)
                             {
                                 if (FoodIntakeUnit.Meal is null) continue;
                                 var units = FoodIntakeUnit.Meal.IsLiquid ? 
-                                    _rm?.GetString("ml", _culture) : _rm?.GetString("gr", _culture);
-                                Console.WriteLine($"\t{FoodIntakeUnit.Meal?.Name} - {FoodIntakeUnit.Weight} {units}, {foodIntake.TotalKilocalories}");
+                                    _rm?.GetString("ml", _culture) : _rm?.GetString("g", _culture);
+                                Console.WriteLine(
+                                    $"\t\t{FoodIntakeUnit.Meal?.Name} - {FoodIntakeUnit.Weight} {units}, {foodIntake.TotalKilocalories}" +
+                            _rm?.GetString("kcal", _culture));
                             }    
                         }
                         Console.Write("\n" + _rm?.GetString("ReturnMainMenu", _culture));
@@ -121,9 +124,9 @@ namespace MyFitness.View
                         foreach (var meal in meals)
                         {
                             Console.WriteLine($"{meal}" +
-                                $"\n" + _rm?.GetString("Carbs", _culture) + $"{meal.Carbohydrates}" + _rm?.GetString("gr", _culture) +
-                                $"\n" + _rm?.GetString("Fats", _culture) + $"{meal.Fats}" + _rm?.GetString("gr", _culture) +
-                                $"\n" + _rm?.GetString("Proteins", _culture) + $"{meal.Proteins}" + _rm?.GetString("gr", _culture) + "\n");
+                                $"\n" + _rm?.GetString("Carbs", _culture) + $"{meal.Carbohydrates}" + _rm?.GetString("g", _culture) +
+                                $"\n" + _rm?.GetString("Fats", _culture) + $"{meal.Fats}" + _rm?.GetString("g", _culture) +
+                                $"\n" + _rm?.GetString("Proteins", _culture) + $"{meal.Proteins}" + _rm?.GetString("g", _culture) + "\n");
                         }
                         Console.Write(_rm?.GetString("ReturnMainMenu", _culture));
                         Console.ReadKey();
@@ -246,8 +249,10 @@ namespace MyFitness.View
                     {
                         if (foodIntakeUnit.Meal is null) continue;
                         var units = foodIntakeUnit.Meal.IsLiquid ? 
-                            _rm?.GetString("ml", _culture) : _rm?.GetString("gr", _culture);
-                        Console.WriteLine($"\t{foodIntakeUnit.Meal?.Name} - {foodIntakeUnit.Weight} {units}, {foodIntakeUnit.TotalKilocalories} kcal.");
+                            _rm?.GetString("ml", _culture) : _rm?.GetString("g", _culture);
+                        Console.WriteLine(
+                            $"\t{foodIntakeUnit.Meal?.Name} - {foodIntakeUnit.Weight} {units}, {foodIntakeUnit.TotalKilocalories}" +
+                            _rm?.GetString("kcal", _culture));
                     }
 
                     Console.WriteLine("\n" + _rm?.GetString("AddAnotherMeal?", _culture) + _rm?.GetString("Confirmation", _culture));
@@ -276,7 +281,9 @@ namespace MyFitness.View
             var meal = foodIntakeController.Meals?.SingleOrDefault(m => m.Name == mealName);
 
             var isLiquid = meal != null ? meal.IsLiquid : GetParsedBoolValue(
-                _rm?.GetString("IsLiquid?", _culture) ?? "Is the product a liquid?");
+                "\n" + _rm?.GetString("IsLiquid?", _culture) ?? "Is the product a liquid?");
+
+            string per100units;
 
             double mealQuantity;
 
@@ -284,28 +291,30 @@ namespace MyFitness.View
             {
                 Console.Write(_rm?.GetString("EnterProductVolume", _culture));
                 mealQuantity = GetParsedLimitedDoubleValue(_rm?.GetString("productVolume", _culture) ?? "product volume", 0, 3000);
+                per100units = _rm?.GetString("Per100mlProduct", _culture) ?? "per 100 ml of the product (just a number in grams)";
             }
             else
             {
                 Console.Write(_rm?.GetString("EnterMealWeight", _culture));
                 mealQuantity = GetParsedLimitedDoubleValue(_rm?.GetString("mealWeight", _culture) ?? "meal weight", 0, 2000);
+                per100units = _rm?.GetString("Per100gMeal", _culture) ?? "per 100 g of the meal (just a number in grams)";
             }
 
             if (meal != null) return (meal, mealQuantity);
 
-            Console.Write("\n" + _rm?.GetString("EnterKcal", _culture));
+            Console.Write("\n" + _rm?.GetString("EnterKcal", _culture) + _rm?.GetString("EnterKcal", _culture) + per100units);
             var kilocalories = GetParsedLimitedDoubleValue(_rm?.GetString("kcals", _culture) ?? "kilocalories", 0, 900);
 
             Console.WriteLine(_rm?.GetString("AddInform?", _culture) + "\n" + _rm?.GetString("Confirmation", _culture));
             if (Console.ReadKey().Key == ConsoleKey.Y)
             {
-                Console.Write(_rm?.GetString("EnterProteins", _culture));
+                Console.Write(_rm?.GetString("EnterProteins", _culture) + per100units);
                 var proteins = GetParsedLimitedDoubleValue(_rm?.GetString("prts", _culture) ?? "proteins", 0, 50);
 
-                Console.Write(_rm?.GetString("EnterFats", _culture));
+                Console.Write(_rm?.GetString("EnterFats", _culture) + per100units);
                 var fats = GetParsedLimitedDoubleValue(_rm?.GetString("fts", _culture) ?? "fats", 0, 100);
 
-                Console.Write(_rm?.GetString("EnterCarbs", _culture));
+                Console.Write(_rm?.GetString("EnterCarbs", _culture) + per100units);
                 var carbohydrates = GetParsedLimitedDoubleValue(_rm?.GetString("crbs", _culture) ?? "carbohydrates", 0, 100);
 
                 return (new Meal(mealName, kilocalories, isLiquid, proteins, fats, carbohydrates), mealQuantity);
@@ -340,7 +349,7 @@ namespace MyFitness.View
             while (true)
             {
                 var value = GetParsedValue<DateTime>(paramName);
-                if (value > lowerBound && value < upperBound) return value;
+                if (value >= lowerBound && value <= upperBound) return value;
                 Console.WriteLine(
                     _rm?.GetString("Incorrect", _culture) + 
                     $" {paramName}. " + 
@@ -354,6 +363,19 @@ namespace MyFitness.View
             {
                 var value = GetParsedValue<double>(paramName);
                 if (value >= lowerBound && value <= upperBound) return value;
+                Console.WriteLine(
+                    _rm?.GetString("Incorrect", _culture) +
+                    $" {paramName}. " +
+                    _rm?.GetString("PleaseTryAgain", _culture));
+            }
+        }
+
+        private static string GetParsedLimitedStringValue(string paramName, int lowerBound, int upperBound)
+        {
+            while (true)
+            {
+                var value = GetParsedValue<string>(paramName);
+                if (!string.IsNullOrWhiteSpace(value) && value.Count() >= lowerBound && value.Count() <= upperBound) return value;
                 Console.WriteLine(
                     _rm?.GetString("Incorrect", _culture) +
                     $" {paramName}. " +

@@ -172,28 +172,28 @@
     <value>Enter the name of activity: </value>
   </data>
   <data name="EnterCarbs" xml:space="preserve">
-    <value>Enter the amount of carbohydrates per 100 g. of the meal (just a number in grams): </value>
+    <value>Enter the amount of carbohydrates </value>
   </data>
   <data name="EnterDateOfBirth" xml:space="preserve">
     <value>Enter date of birth (min. 12 y.o.): </value>
   </data>
   <data name="EnterExEndTime" xml:space="preserve">
-    <value>Enter the end time of the exercise (foramt dd.MM.yyyy HH:mm or only HH.mm): </value>
+    <value>Enter the end time of the exercise (format dd.MM.yyyy HH:mm or only HH.mm): </value>
   </data>
   <data name="EnterExStartTime" xml:space="preserve">
-    <value>Enter the start time of the exercise (foramt dd.MM.yyyy HH:mm or only HH.mm): </value>
+    <value>Enter the start time of the exercise (format dd.MM.yyyy HH:mm or only HH.mm): </value>
   </data>
   <data name="EnterFats" xml:space="preserve">
-    <value>Enter the amount of fats per 100 g. of the meal (just a number in grams): </value>
+    <value>Enter the amount of fats </value>
   </data>
   <data name="EnterGender" xml:space="preserve">
     <value>Enter gender: </value>
   </data>
   <data name="EnterHeight" xml:space="preserve">
-    <value>Enter height: </value>
+    <value>Enter height (in centimeters): </value>
   </data>
   <data name="EnterKcal" xml:space="preserve">
-    <value>Enter the amount of kilocalories per 100 g. of the meal (just a number): </value>
+    <value>Enter the amount of kilocalories </value>
   </data>
   <data name="EnterKcalPerHour" xml:space="preserve">
     <value>Enter the number of kilocalories burned per hour: </value>
@@ -208,13 +208,13 @@
     <value>Enter product volume: </value>
   </data>
   <data name="EnterProteins" xml:space="preserve">
-    <value>Enter the amount of proteins per 100 g. of the meal (just a number in grams): </value>
+    <value>Enter the amount of proteins  </value>
   </data>
   <data name="EnterUsername" xml:space="preserve">
     <value>Enter username: </value>
   </data>
   <data name="EnterWeight" xml:space="preserve">
-    <value>Enter weight: </value>
+    <value>Enter weight (in kilograms): </value>
   </data>
   <data name="Exit" xml:space="preserve">
     <value>Q - Exit</value>
@@ -225,8 +225,8 @@
   <data name="fts" xml:space="preserve">
     <value>fats</value>
   </data>
-  <data name="gr" xml:space="preserve">
-    <value>gr.</value>
+  <data name="g" xml:space="preserve">
+    <value>g</value>
   </data>
   <data name="height" xml:space="preserve">
     <value>height</value>
@@ -247,7 +247,13 @@
     <value>meal weight</value>
   </data>
   <data name="ml" xml:space="preserve">
-    <value>ml.</value>
+    <value>ml</value>
+  </data>
+  <data name="Per100gMeal" xml:space="preserve">
+    <value>per 100 g of the meal (just a number in grams)</value>
+  </data>
+  <data name="Per100mlProduct" xml:space="preserve">
+    <value>per 100 ml of the product (just a number in grams)</value>
   </data>
   <data name="PleaseTryAgain" xml:space="preserve">
     <value>Please, try again</value>
@@ -277,10 +283,10 @@
     <value>Thank you for staying with us</value>
   </data>
   <data name="TotalKcalCurFoodIntake" xml:space="preserve">
-    <value>Total calories for the current food intake: </value>
+    <value>Total kilocalories for the current food intake: </value>
   </data>
   <data name="TotalKcalFoodIntake" xml:space="preserve">
-    <value>Total calories per food intake: </value>
+    <value>Total kilocalories per food intake: </value>
   </data>
   <data name="UserExercises" xml:space="preserve">
     <value>X - List of all your exercises</value>
