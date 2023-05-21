@@ -143,7 +143,27 @@ namespace MyFitness.View
                         continue;
 
                     case ConsoleKey.D:
-                        userController.DeleteCurrentUser();
+                        while (true)
+                        {
+                            Console.WriteLine(_rm?.GetString("DeleteAccount?", _culture) + "\n" + _rm?.GetString("Confirmation", _culture));
+                            var delConfirmation = Console.ReadKey();
+
+                            switch (delConfirmation.Key)
+                            {
+                                default:
+                                    continue;
+
+                                case ConsoleKey.Y:
+                                    userController.DeleteCurrentUser();
+                                    Console.WriteLine(_rm?.GetString("SucsDel", _culture));
+                                    break;
+
+                                case ConsoleKey.N:
+                                    Console.WriteLine(_rm?.GetString("ThankForStaying", _culture));
+                                    break;
+                            }
+                            break;
+                        }
                         break;
 
                     case ConsoleKey.Q:

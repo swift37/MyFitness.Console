@@ -159,6 +159,9 @@
   <data name="DelCurUser" xml:space="preserve">
     <value>D - Delete current user</value>
   </data>
+  <data name="DeleteAccount?" xml:space="preserve">
+    <value>Do you really want to delete your account?</value>
+  </data>
   <data name="Duration" xml:space="preserve">
     <value>Duration: </value>
   </data>
@@ -266,6 +269,12 @@
   </data>
   <data name="startExTime" xml:space="preserve">
     <value>start time of the exercise</value>
+  </data>
+  <data name="SucsDel" xml:space="preserve">
+    <value>Your account has been successfully deleted</value>
+  </data>
+  <data name="ThankForStaying" xml:space="preserve">
+    <value>Thank you for staying with us</value>
   </data>
   <data name="TotalKcalCurFoodIntake" xml:space="preserve">
     <value>Total calories for the current food intake: </value>

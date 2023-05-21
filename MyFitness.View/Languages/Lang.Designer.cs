@@ -187,6 +187,15 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you really want to delete your account?.
+        /// </summary>
+        internal static string DeleteAccount_ {
+            get {
+                return ResourceManager.GetString("DeleteAccount?", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Duration: .
         /// </summary>
         internal static string Duration {
@@ -507,6 +516,24 @@ namespace MyFitness.View.Languages {
         internal static string startExTime {
             get {
                 return ResourceManager.GetString("startExTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your account has been successfully deleted.
+        /// </summary>
+        internal static string SucsDel {
+            get {
+                return ResourceManager.GetString("SucsDel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thank you for staying with us.
+        /// </summary>
+        internal static string ThankForStaying {
+            get {
+                return ResourceManager.GetString("ThankForStaying", resourceCulture);
             }
         }
         
