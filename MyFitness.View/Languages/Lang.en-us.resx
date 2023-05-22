@@ -250,10 +250,10 @@
     <value>ml</value>
   </data>
   <data name="Per100gMeal" xml:space="preserve">
-    <value>per 100 g of the meal (just a number in grams)</value>
+    <value>per 100 g of the meal (just a number in grams): </value>
   </data>
   <data name="Per100mlProduct" xml:space="preserve">
-    <value>per 100 ml of the product (just a number in grams)</value>
+    <value>per 100 ml of the product (just a number in grams): </value>
   </data>
   <data name="PleaseTryAgain" xml:space="preserve">
     <value>Please, try again</value>
@@ -268,7 +268,7 @@
     <value>proteins</value>
   </data>
   <data name="ReturnMainMenu" xml:space="preserve">
-    <value>Press any key to return to the main menu</value>
+    <value>Press any key to return to the main menu...</value>
   </data>
   <data name="SelectAction" xml:space="preserve">
     <value>Select an action:</value>

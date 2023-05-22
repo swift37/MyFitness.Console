@@ -10,7 +10,7 @@ namespace MyFitness.BL.Models
     public class Activity : NamedEntity
     {
         /// <summary>
-        /// Kilocalories per minut.
+        /// Kilocalories per hour.
         /// </summary>
         [DataMember(Name = "calories_per_hour")]
         public double CaloriesPerHour { get; set; }
@@ -27,7 +27,7 @@ namespace MyFitness.BL.Models
             #region Data validation
 
             if (name is null) throw new ArgumentNullException(nameof(name));
-            if (caloriesPerHour <= 0) throw new InvalidDataException(nameof(caloriesPerHour)); 
+            if (caloriesPerHour <= 0.0) throw new InvalidDataException(nameof(caloriesPerHour)); 
 
             #endregion
 

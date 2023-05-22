@@ -457,7 +457,7 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to per 100 g of the meal (just a number in grams).
+        ///   Looks up a localized string similar to per 100 g of the meal (just a number in grams): .
         /// </summary>
         internal static string Per100gMeal {
             get {
@@ -466,7 +466,7 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to per 100 ml of the product (just a number in grams).
+        ///   Looks up a localized string similar to per 100 ml of the product (just a number in grams): .
         /// </summary>
         internal static string Per100mlProduct {
             get {
@@ -511,7 +511,7 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Press any key to return to the main menu.
+        ///   Looks up a localized string similar to Press any key to return to the main menu....
         /// </summary>
         internal static string ReturnMainMenu {
             get {

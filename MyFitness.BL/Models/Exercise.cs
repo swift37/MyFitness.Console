@@ -37,7 +37,7 @@ namespace MyFitness.BL.Models
         [DataMember(Name = "burned_calories")]
         public double BurnedCalories 
         {
-            get => ((Activity?.CaloriesPerHour ?? 0) / 60) * Duration.TotalMinutes; 
+            get => Math.Round((Activity?.CaloriesPerHour ?? 0) / 60.0 * Duration.TotalMinutes, 2); 
             set { } 
         }
 

@@ -15,7 +15,7 @@ namespace MyFitness.View
 
         static void Main(string[] args)
         {
-            _dataService = new SerializationService();
+            _dataService = new DatabaseService();
             _culture = CultureInfo.CurrentCulture;
             _rm = new ResourceManager("MyFitness.View.Languages.Lang", typeof(Program).Assembly);
 
@@ -138,7 +138,8 @@ namespace MyFitness.View
                         if (activities is null) continue;
                         foreach (var activity in activities)
                         {
-                            Console.WriteLine($"{activity}\n");
+                            Console.WriteLine(
+                                $"{activity}, {activity.CaloriesPerHour} " + _rm?.GetString("kcalPerHour", _culture) + "\n");
                         }
                         Console.Write(_rm?.GetString("ReturnMainMenu", _culture));
                         Console.ReadKey();
@@ -281,7 +282,7 @@ namespace MyFitness.View
             var meal = foodIntakeController.Meals?.SingleOrDefault(m => m.Name == mealName);
 
             var isLiquid = meal != null ? meal.IsLiquid : GetParsedBoolValue(
-                "\n" + _rm?.GetString("IsLiquid?", _culture) ?? "Is the product a liquid?");
+                "\n" + _rm?.GetString("IsLiquid?", _culture) ?? "Is the product a liquid?" + "\n");
 
             string per100units;
 
