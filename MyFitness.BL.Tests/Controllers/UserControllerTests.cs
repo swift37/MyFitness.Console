@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyFitness.BL.Controllers;
+using MyFitness.BL.Models;
 using MyFitness.BL.Services;
 
 namespace MyFitness.BL.Controllers.Tests
@@ -7,12 +8,11 @@ namespace MyFitness.BL.Controllers.Tests
     [TestClass()]
     public class UserControllerTests
     {
-        [Priority(0)]
         [TestMethod()]
         public void InitializationNewUserTest()
         {
             // Arrange
-            var dataService = new DatabaseService();
+            var dataService = new DatabaseService("MyFitnessTest.db");
             var username = Guid.NewGuid().ToString();
 
             // Act
@@ -23,15 +23,14 @@ namespace MyFitness.BL.Controllers.Tests
             Assert.AreEqual(true, userContrDb.IsNewUser);
         }
 
-        [Priority(1)]
         [TestMethod()]
         public void CreateUserDataDatabaseTest()
         {
             // Arrange
-            var dataServiceDb = new DatabaseService();
+            var dataServiceDb = new DatabaseService("MyFitnessTest.db");
 
-            var username = "5D098A9C-EBCE-4FD5-B0AE-8162133E6578";
-            var gender = "testGender";
+            var username = Guid.NewGuid().ToString();
+            var gender = Guid.NewGuid().ToString();
             var dateOfBirth = DateTime.Now.AddYears(-20);
             var weight = 70;
             var height = 180;
@@ -58,7 +57,7 @@ namespace MyFitness.BL.Controllers.Tests
             var dataServiceSer = new SerializationService();
 
             var username = Guid.NewGuid().ToString();
-            var gender = "testGender";
+            var gender = Guid.NewGuid().ToString();
             var dateOfBirth = DateTime.Now.AddYears(-20);
             var weight = 70;
             var height = 180;
@@ -78,23 +77,26 @@ namespace MyFitness.BL.Controllers.Tests
             Assert.AreEqual(userContrSer.CurrentUser?.Age, userContrSer2.CurrentUser?.Age);
         }
 
-        [Priority(2)]
         [TestMethod()]
         public void DeleteCurrentUserTest()
         {
             // Arrange
-            var dataService = new DatabaseService();
-            var username = "5D098A9C-EBCE-4FD5-B0AE-8162133E6578";
-            var tempUsername = "temp";
+            var dataService = new DatabaseService("MyFitnessTest.db");
+            var username = Guid.NewGuid().ToString();
+            var gender = Guid.NewGuid().ToString();
+            var dateOfBirth = DateTime.Now.AddYears(-20);
+            var weight = 70;
+            var height = 180;
+
+            var userContrDb = new UserController(username, dataService);
 
             // Act
-            var userContrDb = new UserController(username, dataService);
+            userContrDb.CreateUserData(gender, dateOfBirth, weight, height);
             userContrDb.DeleteCurrentUser();
 
-            var userContrDb2 = new UserController(tempUsername, dataService);
-
             // Assert
-            Assert.IsNull(userContrDb2.Users?.SingleOrDefault(user => user.Name == "5D098A9C-EBCE-4FD5-B0AE-8162133E6578"));
+            Assert.IsNotNull(dataService.LoadData<User>());
+            Assert.IsNull(dataService.LoadData<User>()?.SingleOrDefault(user => user.Name == username));
         }
     }
 }

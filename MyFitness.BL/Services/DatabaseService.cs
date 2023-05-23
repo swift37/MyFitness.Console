@@ -11,11 +11,11 @@ namespace MyFitness.BL.Services
     /// </summary>
     public class DatabaseService : IDataIOService
     {
-        private readonly FitnessDb _db;
+        private readonly FitnessDbContext _dbContext;
 
-        public DatabaseService()
+        public DatabaseService(string connectionString)
         {
-            _db = new FitnessDb();
+            _dbContext = new FitnessDbContext(connectionString);
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace MyFitness.BL.Services
         /// <returns>Entities enumerable.</returns>
         public IEnumerable<T>? LoadData<T>() where T : Entity
         {
-            return _db.Set<T>().ToArray();
+            return _dbContext.Set<T>().ToArray();
         }
 
         public void SaveData<T>(IEnumerable<T>? entities) where T : Entity
@@ -33,10 +33,10 @@ namespace MyFitness.BL.Services
             if (entities is null) throw new ArgumentNullException(nameof(entities));
 
             var entity = entities.LastOrDefault();
-            if (entity is null) return; 
+            if (entity is null) return;
 
-            _db.Entry(entity).State = EntityState.Added;
-            _db.SaveChanges();
+            _dbContext.Entry(entity).State = EntityState.Added;
+            _dbContext.SaveChanges();
         }
 
         /// <summary>
@@ -46,9 +46,9 @@ namespace MyFitness.BL.Services
         /// <param name="id">Entity id.</param>
         public void Remove<T>(int id) where T : Entity, new()
         {
-            var entity = _db.Set<T>().Local.FirstOrDefault(entity => entity.Id == id) ?? new T { Id = id };
-            _db.Set<T>().Remove(entity);
-            _db.SaveChanges();
+            var entity = _dbContext.Set<T>().Local.FirstOrDefault(entity => entity.Id == id) ?? new T { Id = id };
+            _dbContext.Set<T>().Remove(entity);
+            _dbContext.SaveChanges();
         }
     }
 }

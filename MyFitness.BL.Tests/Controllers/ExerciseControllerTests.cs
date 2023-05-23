@@ -10,7 +10,7 @@ namespace MyFitness.BL.Controllers.Tests
         public void AddDatabaseTest()
         {
             // Arrange
-            var dataServiceDb = new DatabaseService();
+            var dataServiceDb = new DatabaseService("MyFitnessTest.db");
 
             var username = Guid.NewGuid().ToString();
             var activityName = Guid.NewGuid().ToString();
@@ -26,6 +26,7 @@ namespace MyFitness.BL.Controllers.Tests
 
             // Act
             exContrDb.Add(activity, DateTime.Now.AddMinutes(-61), DateTime.Now.AddMinutes(-1));
+            userContrDb.DeleteCurrentUser();
 
             // Assert
             Assert.IsNotNull(exContrDb.Exercises?.FirstOrDefault(a => a.Activity?.Name == activity.Name));
@@ -46,7 +47,7 @@ namespace MyFitness.BL.Controllers.Tests
 
             var exContrSer = new ExerciseController(userContrSer.CurrentUser, dataServiceSer);
 
-            var activity = new Activity("Runing", activityKcals);
+            var activity = new Activity("Running", activityKcals);
 
             // Act
             exContrSer.Add(activity, DateTime.Now.AddMinutes(-60), DateTime.Now);

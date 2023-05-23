@@ -1,4 +1,5 @@
-﻿using MyFitness.BL.Models;
+﻿using Microsoft.VisualBasic.FileIO;
+using MyFitness.BL.Models;
 using MyFitness.BL.Services;
 using MyFitness.BL.Services.Interfaces;
 
@@ -30,7 +31,10 @@ namespace MyFitness.BL.Controllers
             FoodIntakes = LoadFoodIntakes();
             Meals = LoadMeals();
 
+            var newFoodIntakeId = FoodIntakes?.LastOrDefault()?.Id ?? 0;
+            
             FoodIntake = new FoodIntake(_user, foodIntakeMoment);
+            FoodIntake.Id = ++newFoodIntakeId;
         }
 
         /// <summary>
@@ -49,13 +53,53 @@ namespace MyFitness.BL.Controllers
             if (meal is null) throw new ArgumentNullException(nameof(meal));
 
             #endregion
-   
+            
             if (Meals.SingleOrDefault(m => m.Name == meal.Name) is null) Meals.Add(meal);
+
+            var newMealId = Meals.LastOrDefault()?.Id ?? 0;
+            meal.Id = ++newMealId;
 
             if (FoodIntakes.SingleOrDefault(f => f.Moment.ToString() == FoodIntake.Moment.ToString()) is null) 
                 FoodIntakes.Add(FoodIntake);
 
             FoodIntake.Add(meal, weight);
+        }
+
+        public bool DeleteFoodIntake(DateTime foodIntakeMoment)
+        {
+            #region Data validation
+
+            if (_user is null) throw new ArgumentNullException(nameof(_user)); 
+
+            #endregion
+
+            var foodIntake = FoodIntakes?.FirstOrDefault(
+                fI => fI.Moment.ToString() == foodIntakeMoment.ToString() || fI.User?.Name == _user.Name);
+            if (foodIntake is null) return false;
+
+            var foodIntakeUnitsIds = foodIntake.Meals.Select(u => u.Id);
+            foreach (var item in foodIntakeUnitsIds)
+            {
+                _dataService.Remove<FoodIntakeUnit>(item);
+            }
+
+            _dataService.Remove<FoodIntake>(foodIntake.Id);
+            return true;
+        }
+
+        public bool DeleteMeal(string? name)
+        {
+            #region Data validation
+
+            if (name is null) throw new ArgumentNullException(nameof(name)); 
+
+            #endregion
+
+            var meal = Meals?.SingleOrDefault(meal => meal.Name == name);
+            if (meal is null) return false;
+
+            _dataService.Remove<Meal>(meal.Id);
+            return true;
         }
 
         /// <summary>

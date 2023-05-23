@@ -3,7 +3,7 @@ using System.Data.Entity;
 
 namespace MyFitness.BL.Context
 {
-    public class FitnessDb : DbContext
+    public class FitnessDbContext : DbContext
     {
         public DbSet<Activity>? Activities { get; set; }
 
@@ -19,6 +19,6 @@ namespace MyFitness.BL.Context
 
         public DbSet<User>? Users { get; set; }
 
-        public FitnessDb() : base("MyFitness.db") { }
+        public FitnessDbContext(string connectrionString) : base(connectrionString) { }
     }
 }

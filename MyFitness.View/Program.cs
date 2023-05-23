@@ -15,7 +15,7 @@ namespace MyFitness.View
 
         static void Main(string[] args)
         {
-            _dataService = new DatabaseService();
+            _dataService = new DatabaseService("MyFitness.db");
             _culture = CultureInfo.CurrentCulture;
             _rm = new ResourceManager("MyFitness.View.Languages.Lang", typeof(Program).Assembly);
 
