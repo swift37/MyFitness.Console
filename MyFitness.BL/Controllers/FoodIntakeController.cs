@@ -31,9 +31,10 @@ namespace MyFitness.BL.Controllers
             FoodIntakes = LoadFoodIntakes();
             Meals = LoadMeals();
 
-            var newFoodIntakeId = FoodIntakes?.LastOrDefault()?.Id ?? 0;
-            
             FoodIntake = new FoodIntake(_user, foodIntakeMoment);
+
+            var newFoodIntakeId = FoodIntakes?.LastOrDefault()?.Id ?? 0;
+            FoodIntakes?.Add(FoodIntake);
             FoodIntake.Id = ++newFoodIntakeId;
         }
 
@@ -54,13 +55,15 @@ namespace MyFitness.BL.Controllers
 
             #endregion
             
-            if (Meals.SingleOrDefault(m => m.Name == meal.Name) is null) Meals.Add(meal);
+            if (Meals.SingleOrDefault(m => m.Name == meal.Name) is null)
+            {
+                var newMealId = Meals.LastOrDefault()?.Id ?? 0;
+                Meals.Add(meal);
+                meal.Id = ++newMealId;
+            }
 
-            var newMealId = Meals.LastOrDefault()?.Id ?? 0;
-            meal.Id = ++newMealId;
-
-            if (FoodIntakes.SingleOrDefault(f => f.Moment.ToString() == FoodIntake.Moment.ToString()) is null) 
-                FoodIntakes.Add(FoodIntake);
+            //if (FoodIntakes.SingleOrDefault(f => f.Moment.ToString() == FoodIntake.Moment.ToString()) is null) 
+            //    FoodIntakes.Add(FoodIntake);
 
             FoodIntake.Add(meal, weight);
         }
@@ -74,7 +77,7 @@ namespace MyFitness.BL.Controllers
             #endregion
 
             var foodIntake = FoodIntakes?.FirstOrDefault(
-                fI => fI.Moment.ToString() == foodIntakeMoment.ToString() || fI.User?.Name == _user.Name);
+                fI => fI.Moment.ToString() == foodIntakeMoment.ToString() && fI.User?.Name == _user.Name);
             if (foodIntake is null) return false;
 
             var foodIntakeUnitsIds = foodIntake.Meals.Select(u => u.Id);
@@ -84,6 +87,7 @@ namespace MyFitness.BL.Controllers
             }
 
             _dataService.Remove<FoodIntake>(foodIntake.Id);
+            FoodIntakes?.Remove(foodIntake);
             return true;
         }
 
@@ -99,6 +103,7 @@ namespace MyFitness.BL.Controllers
             if (meal is null) return false;
 
             _dataService.Remove<Meal>(meal.Id);
+            Meals?.Remove(meal);
             return true;
         }
 
@@ -126,7 +131,10 @@ namespace MyFitness.BL.Controllers
         public void Save()
         {
             _dataService.SaveData(FoodIntakes);
-            if (!(_dataService is DatabaseService)) _dataService.SaveData(Meals);
+            if (!(_dataService is DatabaseService))
+            {
+                _dataService.SaveData(Meals);
+            }    
         }
 
         public void Dispose() 

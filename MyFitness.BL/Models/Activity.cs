@@ -12,8 +12,8 @@ namespace MyFitness.BL.Models
         /// <summary>
         /// Kilocalories per hour.
         /// </summary>
-        [DataMember(Name = "calories_per_hour")]
-        public double CaloriesPerHour { get; set; }
+        [DataMember(Name = "kilocalories_per_hour")]
+        public double KilocaloriesPerHour { get; set; }
 
         /// <summary>
         /// Create new physical activity.
@@ -32,7 +32,7 @@ namespace MyFitness.BL.Models
             #endregion
 
             Name = name;
-            CaloriesPerHour = caloriesPerHour;
+            KilocaloriesPerHour = caloriesPerHour;
         }
 
         /// <summary>

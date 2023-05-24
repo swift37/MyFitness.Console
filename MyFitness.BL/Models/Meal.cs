@@ -71,7 +71,7 @@ namespace MyFitness.BL.Models
 
         public override string ToString()
         {
-            return $"{Name}, {Kilocalories} kcal. per 100 grams";
+            return $"{Name}";
         }
     }
 }

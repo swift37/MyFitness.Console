@@ -32,14 +32,14 @@ namespace MyFitness.BL.Controllers.Tests
             // Act
             foodIntakeContrDb.Add(meal, mealWeight);
             foodIntakeContrDb.Save();
-            userContrDb.DeleteCurrentUser();
 
             // Assert
-            Assert.IsNotNull(dataServiceDb.LoadData<FoodIntake>()?.FirstOrDefault(
-                fI => fI.Moment.ToString() == foodIntakeMoment.ToString()));
-            Assert.IsNotNull(dataServiceDb.LoadData<Meal>()?.FirstOrDefault(
+            Assert.IsNotNull(dataServiceDb.LoadData<FoodIntake>()?.SingleOrDefault(
+                fI => fI.Moment.ToString() == foodIntakeMoment.ToString() && fI.User?.Name == username));
+            Assert.IsNotNull(dataServiceDb.LoadData<Meal>()?.SingleOrDefault(
                 m => m.Name == mealName && m.Kilocalories == mealKcals));
-            Assert.IsNotNull(dataServiceDb.LoadData<FoodIntakeUnit>()?.FirstOrDefault(u => u.Weight == mealWeight));
+            Assert.IsNotNull(dataServiceDb.LoadData<FoodIntakeUnit>()?.SingleOrDefault(
+                u => u.Weight == mealWeight && u.Meal?.Name == mealName));
         }
 
         [TestMethod()]
@@ -51,21 +51,25 @@ namespace MyFitness.BL.Controllers.Tests
             var username = Guid.NewGuid().ToString();
             var mealName = Guid.NewGuid().ToString();
             var rnd = new Random();
+            var mealKcals = rnd.Next(900);
             var mealWeight = rnd.NextDouble() * 1000;
+            var foodIntakeMoment = DateTime.UtcNow;
 
             var userContrSer = new UserController(username, dataServiceSer);
 
-            var foodIntakeContrSer = new FoodIntakeController(userContrSer.CurrentUser, DateTime.UtcNow, dataServiceSer);
+            var foodIntakeContrSer = new FoodIntakeController(userContrSer.CurrentUser, foodIntakeMoment, dataServiceSer);
 
-            var meal = new Meal(mealName, rnd.Next(900), false);
+            var meal = new Meal(mealName, mealKcals, false);
 
             // Act
             foodIntakeContrSer.Add(meal, mealWeight);
+            foodIntakeContrSer.Save();
 
             // Assert
-            Assert.AreEqual(meal.Name, foodIntakeContrSer.FoodIntake?.Meals?.First().Meal?.Name);
-            Assert.AreEqual(meal.Kilocalories, foodIntakeContrSer.FoodIntake?.Meals?.First().Meal?.Kilocalories);
-            Assert.AreEqual(mealWeight, foodIntakeContrSer.FoodIntake?.Meals?.First().Weight);
+            Assert.IsNotNull(dataServiceSer.LoadData<FoodIntake>()?.SingleOrDefault(
+                fI => fI.Moment.ToString() == foodIntakeMoment.ToString() && fI.User?.Name == username));
+            Assert.IsNotNull(dataServiceSer.LoadData<Meal>()?.SingleOrDefault(
+                m => m.Name == mealName && m.Kilocalories == mealKcals));
         }
 
         [TestMethod()]
@@ -90,7 +94,7 @@ namespace MyFitness.BL.Controllers.Tests
             // Act
             foodIntakeContrDb.Add(meal, mealWeight);
             foodIntakeContrDb.Save();
-            userContrDb.DeleteCurrentUser();
+
             foodIntakeContrDb.DeleteFoodIntake(foodIntakeMoment);
 
             // Assert
@@ -122,8 +126,9 @@ namespace MyFitness.BL.Controllers.Tests
             // Act
             foodIntakeContrDb.Add(meal, mealWeight);
             foodIntakeContrDb.Save();
-            foodIntakeContrDb.DeleteFoodIntake(foodIntakeMoment);
+
             foodIntakeContrDb.DeleteMeal(mealName);
+            foodIntakeContrDb.DeleteFoodIntake(foodIntakeMoment);
             userContrDb.DeleteCurrentUser();
 
             // Assert

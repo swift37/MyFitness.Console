@@ -41,12 +41,53 @@ namespace MyFitness.BL.Controllers
 
             #endregion
 
-            if (Activities.SingleOrDefault(a => a.Name == activity.Name) is null) Activities.Add(activity);
+            if (Activities.SingleOrDefault(a => a.Name == activity.Name) is null)
+            {
+                var newActivityId = Activities.LastOrDefault()?.Id ?? 0;
+                Activities.Add(activity);
+                activity.Id = ++newActivityId;
+            }
 
             var newExercise = new Exercise(start, finish, activity, _user);
+            var newExerciseId = Exercises.LastOrDefault()?.Id ?? 0;
+            newExercise.Id = ++newExerciseId;
+
             Exercises.Add(newExercise);
 
             Save();
+        }
+
+        public bool DeleteExercise(DateTime exerciseStartDateTime)
+        {
+            #region Data validation
+
+            if (_user is null) throw new ArgumentNullException(nameof(_user));
+
+            #endregion
+
+            var exercise = Exercises?.FirstOrDefault(
+                ex => ex.Start.ToString() == exerciseStartDateTime.ToString() && ex.User?.Name == _user.Name);
+            if (exercise is null) return false;
+
+            _dataService.Remove<Exercise>(exercise.Id);
+            Exercises?.Remove(exercise);
+            return true;
+        }
+
+        public bool DeleteActivity(string? name)
+        {
+            #region Data validation
+
+            if (name is null) throw new ArgumentNullException(nameof(name));
+
+            #endregion
+
+            var activity = Activities?.SingleOrDefault(activity => activity.Name == name);
+            if (activity is null) return false;
+
+            _dataService.Remove<Activity>(activity.Id);
+            Activities?.Remove(activity);
+            return true;
         }
 
         /// <summary>

@@ -97,9 +97,6 @@ namespace MyFitness.BL.Controllers
         {
             if (CurrentUser is null) return;
 
-            //var removableUser = Users?.SingleOrDefault(user => user.Name == CurrentUser.Name);
-            //if (removableUser is null) return;
-
             _dataService.Remove<User>(CurrentUser.Id);
         }
 

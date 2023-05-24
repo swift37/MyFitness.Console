@@ -12,7 +12,7 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        CaloriesPerHour = c.Double(nullable: false),
+                        KilocaloriesPerHour = c.Double(nullable: false),
                         Name = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);

@@ -4,6 +4,7 @@ using MyFitness.BL.Services;
 using MyFitness.BL.Services.Interfaces;
 using System.Globalization;
 using System.Resources;
+using System.Text;
 
 namespace MyFitness.View
 {
@@ -15,7 +16,11 @@ namespace MyFitness.View
 
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.UTF8;
+
             _dataService = new DatabaseService("MyFitness.db");
+            //_dataService = new SerializationService();
+
             _culture = CultureInfo.CurrentCulture;
             _rm = new ResourceManager("MyFitness.View.Languages.Lang", typeof(Program).Assembly);
 
@@ -83,8 +88,7 @@ namespace MyFitness.View
                             if(foodIntake.User is null) continue;
                             if (foodIntake.User.Id != userController.CurrentUser?.Id) continue; 
                             Console.WriteLine($"{foodIntake.Moment}\n\t" +
-                                _rm?.GetString("TotalKcalFoodIntake", _culture) + $"{foodIntake.TotalKilocalories}" +
-                            _rm?.GetString("kcal", _culture));
+                                _rm?.GetString("TotalKcalFoodIntake", _culture) + $"{foodIntake.TotalKilocalories}");
                             if (foodIntake.Meals is null) continue;
                             foreach (var FoodIntakeUnit in foodIntake.Meals)
                             {
@@ -92,8 +96,8 @@ namespace MyFitness.View
                                 var units = FoodIntakeUnit.Meal.IsLiquid ? 
                                     _rm?.GetString("ml", _culture) : _rm?.GetString("g", _culture);
                                 Console.WriteLine(
-                                    $"\t\t{FoodIntakeUnit.Meal?.Name} - {FoodIntakeUnit.Weight} {units}, {foodIntake.TotalKilocalories}" +
-                            _rm?.GetString("kcal", _culture));
+                                    $"\t\t{FoodIntakeUnit.Meal?.Name} - {FoodIntakeUnit.Weight} {units}, {foodIntake.TotalKilocalories} " +
+                                    _rm?.GetString("kcals", _culture));
                             }    
                         }
                         Console.Write("\n" + _rm?.GetString("ReturnMainMenu", _culture));
@@ -139,7 +143,7 @@ namespace MyFitness.View
                         foreach (var activity in activities)
                         {
                             Console.WriteLine(
-                                $"{activity}, {activity.CaloriesPerHour} " + _rm?.GetString("kcalPerHour", _culture) + "\n");
+                                $"{activity}, {activity.KilocaloriesPerHour} " + _rm?.GetString("kcalPerHour", _culture) + "\n");
                         }
                         Console.Write(_rm?.GetString("ReturnMainMenu", _culture));
                         Console.ReadKey();
@@ -252,11 +256,11 @@ namespace MyFitness.View
                         var units = foodIntakeUnit.Meal.IsLiquid ? 
                             _rm?.GetString("ml", _culture) : _rm?.GetString("g", _culture);
                         Console.WriteLine(
-                            $"\t{foodIntakeUnit.Meal?.Name} - {foodIntakeUnit.Weight} {units}, {foodIntakeUnit.TotalKilocalories}" +
+                            $"\t{foodIntakeUnit.Meal?.Name} - {foodIntakeUnit.Weight} {units}, {foodIntakeUnit.TotalKilocalories} " +
                             _rm?.GetString("kcal", _culture));
                     }
 
-                    Console.WriteLine("\n" + _rm?.GetString("AddAnotherMeal?", _culture) + _rm?.GetString("Confirmation", _culture));
+                    Console.WriteLine("\n" + _rm?.GetString("AddAnotherMeal?", _culture) + "\n" + _rm?.GetString("Confirmation", _culture));
                     if (Console.ReadKey().Key != ConsoleKey.Y)
                     {
                         foodIntakeController.Save();
@@ -290,13 +294,13 @@ namespace MyFitness.View
 
             if (isLiquid)
             {
-                Console.Write(_rm?.GetString("EnterProductVolume", _culture));
+                Console.Write("\n" + _rm?.GetString("EnterProductVolume", _culture));
                 mealQuantity = GetParsedLimitedDoubleValue(_rm?.GetString("productVolume", _culture) ?? "product volume", 0, 3000);
                 per100units = _rm?.GetString("Per100mlProduct", _culture) ?? "per 100 ml of the product (just a number in grams)";
             }
             else
             {
-                Console.Write(_rm?.GetString("EnterMealWeight", _culture));
+                Console.Write("\n" + _rm?.GetString("EnterMealWeight", _culture));
                 mealQuantity = GetParsedLimitedDoubleValue(_rm?.GetString("mealWeight", _culture) ?? "meal weight", 0, 2000);
                 per100units = _rm?.GetString("Per100gMeal", _culture) ?? "per 100 g of the meal (just a number in grams)";
             }

@@ -13,7 +13,7 @@ namespace MyFitness.BL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202305211732168_Initial"; }
+            get { return "202305231558287_Initial"; }
         }
         
         string IMigrationMetadata.Source
