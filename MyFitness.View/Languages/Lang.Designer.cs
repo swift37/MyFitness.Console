@@ -61,6 +61,24 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activity was not found.
+        /// </summary>
+        internal static string ActivityNotFound {
+            get {
+                return ResourceManager.GetString("ActivityNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activity successfully deleted.
+        /// </summary>
+        internal static string ActivitySucDel {
+            get {
+                return ResourceManager.GetString("ActivitySucDel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Would you like to add another meal?.
         /// </summary>
         internal static string AddAnotherMeal_ {
@@ -120,6 +138,15 @@ namespace MyFitness.View.Languages {
         internal static string AmountBurnedKcal {
             get {
                 return ResourceManager.GetString("AmountBurnedKcal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Press any key to exit the application.
+        /// </summary>
+        internal static string AppExit {
+            get {
+                return ResourceManager.GetString("AppExit", resourceCulture);
             }
         }
         
@@ -187,11 +214,38 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to D - Delete current user.
+        ///   Looks up a localized string similar to Enter the name of the activity you want to delete: .
         /// </summary>
-        internal static string DelCurUser {
+        internal static string Del_EnterActivityName {
             get {
-                return ResourceManager.GetString("DelCurUser", resourceCulture);
+                return ResourceManager.GetString("Del_EnterActivityName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the time or date and start time of the exercise you want to delete: .
+        /// </summary>
+        internal static string Del_EnterExerciseStartTime {
+            get {
+                return ResourceManager.GetString("Del_EnterExerciseStartTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the moment (date and time) of the food intake you want to delete: .
+        /// </summary>
+        internal static string Del_EnterFoodIntakeMoment {
+            get {
+                return ResourceManager.GetString("Del_EnterFoodIntakeMoment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the name of the meal you want to delete: .
+        /// </summary>
+        internal static string Del_EnterMealName {
+            get {
+                return ResourceManager.GetString("Del_EnterMealName", resourceCulture);
             }
         }
         
@@ -367,6 +421,33 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exercise was not found.
+        /// </summary>
+        internal static string ExerciseNotFound {
+            get {
+                return ResourceManager.GetString("ExerciseNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to time or date and start time of the exercise.
+        /// </summary>
+        internal static string exerciseStartTime {
+            get {
+                return ResourceManager.GetString("exerciseStartTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exercise successfully deleted.
+        /// </summary>
+        internal static string ExerciseSucDel {
+            get {
+                return ResourceManager.GetString("ExerciseSucDel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Q - Exit.
         /// </summary>
         internal static string Exit {
@@ -381,6 +462,33 @@ namespace MyFitness.View.Languages {
         internal static string Fats {
             get {
                 return ResourceManager.GetString("Fats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to moment of the food intake.
+        /// </summary>
+        internal static string foodIntakeMoment {
+            get {
+                return ResourceManager.GetString("foodIntakeMoment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Food intake was not found.
+        /// </summary>
+        internal static string FoodIntakeNotFound {
+            get {
+                return ResourceManager.GetString("FoodIntakeNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Food intake successfully deleted.
+        /// </summary>
+        internal static string FoodIntakeSucDel {
+            get {
+                return ResourceManager.GetString("FoodIntakeSucDel", resourceCulture);
             }
         }
         
@@ -453,6 +561,24 @@ namespace MyFitness.View.Languages {
         internal static string kg {
             get {
                 return ResourceManager.GetString("kg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meal was not found.
+        /// </summary>
+        internal static string MealNotFound {
+            get {
+                return ResourceManager.GetString("MealNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meal successfully deleted.
+        /// </summary>
+        internal static string MealSucDel {
+            get {
+                return ResourceManager.GetString("MealSucDel", resourceCulture);
             }
         }
         
@@ -601,6 +727,15 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to R - Return to the settings menu.
+        /// </summary>
+        internal static string R_ReturnSettingsMenu {
+            get {
+                return ResourceManager.GetString("R_ReturnSettingsMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Press any key to return to the main menu....
         /// </summary>
         internal static string ReturnMainMenu {
@@ -610,11 +745,137 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Press any key to return to the settings menu....
+        /// </summary>
+        internal static string ReturnSettingsMenu {
+            get {
+                return ResourceManager.GetString("ReturnSettingsMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select an action:.
         /// </summary>
         internal static string SelectAction {
             get {
                 return ResourceManager.GetString("SelectAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the desired data service for the application.
+        /// </summary>
+        internal static string SelectDataService {
+            get {
+                return ResourceManager.GetString("SelectDataService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to D - Database service.
+        /// </summary>
+        internal static string Service_Database {
+            get {
+                return ResourceManager.GetString("Service_Database", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S - Serialization service.
+        /// </summary>
+        internal static string Service_Serialization {
+            get {
+                return ResourceManager.GetString("Service_Serialization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application data service successfully changed to database service.
+        /// </summary>
+        internal static string ServiceSucChangedDb {
+            get {
+                return ResourceManager.GetString("ServiceSucChangedDb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application data service successfully changed to serialization service.
+        /// </summary>
+        internal static string ServiceSucChangedSer {
+            get {
+                return ResourceManager.GetString("ServiceSucChangedSer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S - Settings.
+        /// </summary>
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A - Delete actvity.
+        /// </summary>
+        internal static string Settings_DelActivity {
+            get {
+                return ResourceManager.GetString("Settings_DelActivity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to D - Delete current user.
+        /// </summary>
+        internal static string Settings_DelCurUser {
+            get {
+                return ResourceManager.GetString("Settings_DelCurUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to E - Delete exercise.
+        /// </summary>
+        internal static string Settings_DelExercise {
+            get {
+                return ResourceManager.GetString("Settings_DelExercise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to F - Delete food intake.
+        /// </summary>
+        internal static string Settings_DelFoodIntake {
+            get {
+                return ResourceManager.GetString("Settings_DelFoodIntake", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M - Delete meal.
+        /// </summary>
+        internal static string Settings_DelMeal {
+            get {
+                return ResourceManager.GetString("Settings_DelMeal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to R - Return to the main menu.
+        /// </summary>
+        internal static string Settings_ReturnMainMenu {
+            get {
+                return ResourceManager.GetString("Settings_ReturnMainMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S - Switch data service.
+        /// </summary>
+        internal static string Settings_SwitchDataService {
+            get {
+                return ResourceManager.GetString("Settings_SwitchDataService", resourceCulture);
             }
         }
         

@@ -34,7 +34,7 @@ namespace MyFitness.BL.Controllers
             FoodIntake = new FoodIntake(_user, foodIntakeMoment);
 
             var newFoodIntakeId = FoodIntakes?.LastOrDefault()?.Id ?? 0;
-            FoodIntakes?.Add(FoodIntake);
+            //FoodIntakes?.Add(FoodIntake);
             FoodIntake.Id = ++newFoodIntakeId;
         }
 
@@ -61,6 +61,9 @@ namespace MyFitness.BL.Controllers
                 Meals.Add(meal);
                 meal.Id = ++newMealId;
             }
+
+            if (FoodIntakes.SingleOrDefault(f => f.Moment.ToString() == FoodIntake.Moment.ToString()) is null)
+                FoodIntakes.Add(FoodIntake);
 
             FoodIntake.Add(meal, weight);
         }

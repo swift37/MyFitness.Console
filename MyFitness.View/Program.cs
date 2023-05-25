@@ -64,7 +64,7 @@ namespace MyFitness.View
                 Console.WriteLine(_rm?.GetString("UserExercises", _culture));
                 Console.WriteLine(_rm?.GetString("AllMeals", _culture));
                 Console.WriteLine(_rm?.GetString("AllActivities", _culture));
-                Console.WriteLine(_rm?.GetString("DelCurUser", _culture));
+                Console.WriteLine(_rm?.GetString("Settings", _culture));
                 Console.WriteLine(_rm?.GetString("Exit", _culture));
                 var key = Console.ReadKey();
                 Console.Clear();
@@ -179,34 +179,206 @@ namespace MyFitness.View
                         Console.Clear();
                         continue;
 
-                    case ConsoleKey.D:
+                    case ConsoleKey.S:
                         while (true)
                         {
-                            Console.WriteLine(_rm?.GetString("DeleteAccount?", _culture) + "\n" + _rm?.GetString("Confirmation", _culture));
-                            var delConfirmation = Console.ReadKey();
+                            if (userController.CurrentUser != null && userController.CurrentUser.Name == "admin")
+                                Console.WriteLine(_rm?.GetString("Settings_DelActivity", _culture));
 
-                            switch (delConfirmation.Key)
+                            Console.WriteLine(_rm?.GetString("Settings_DelExercise", _culture));
+
+                            if (userController.CurrentUser != null && userController.CurrentUser.Name == "admin")
+                                Console.WriteLine(_rm?.GetString("Settings_DelMeal", _culture));
+
+                            Console.WriteLine(_rm?.GetString("Settings_DelFoodIntake", _culture));
+
+                            Console.WriteLine(_rm?.GetString("Settings_DelCurUser", _culture));
+
+                            if (userController.CurrentUser != null && userController.CurrentUser.Name == "admin") 
+                                Console.WriteLine(_rm?.GetString("Settings_SwitchDataService", _culture));
+
+                            Console.WriteLine(_rm?.GetString("Settings_ReturnMainMenu", _culture));
+
+                            var settingsKey = Console.ReadKey();
+                            Console.Clear();
+
+                            switch (settingsKey.Key)
                             {
-                                default:
+                                case ConsoleKey.A:
+                                    if (userController.CurrentUser is null || userController.CurrentUser.Name != "admin")
+                                    {
+                                        Console.Clear();
+                                        continue;
+                                    }
+
+                                    Console.Write(_rm?.GetString("Del_EnterActivityName", _culture));
+                                    var activityName = Console.ReadLine();
+
+                                    using (
+                                        var exerciseContr = new ExerciseController(userController.CurrentUser, _dataService))
+                                    {
+                                        if (exerciseContr.DeleteActivity(activityName))
+                                            Console.WriteLine(_rm?.GetString("ActivitySucDel", _culture));
+                                        else
+                                            Console.WriteLine(_rm?.GetString("ActivityNotFound", _culture));
+                                    }
+                                    Console.Write("\n" + _rm?.GetString("ReturnSettingsMenu", _culture));
+                                    Console.ReadKey();
+                                    Console.Clear();
                                     continue;
 
-                                case ConsoleKey.Y:
-                                    userController.DeleteCurrentUser();
-                                    Console.WriteLine(_rm?.GetString("SucsDel", _culture));
+                                case ConsoleKey.E:
+                                    Console.Write(_rm?.GetString("Del_EnterExerciseStartTime", _culture));
+                                    var exerciseStartTime = GetParsedValue<DateTime>(
+                                        _rm?.GetString("exerciseStartTime", _culture) ?? "time or date and start time of the exercise");
+
+                                    using (
+                                        var exerciseContr = new ExerciseController(userController.CurrentUser, _dataService))
+                                    {
+                                        if (exerciseContr.DeleteExercise(exerciseStartTime))
+                                            Console.WriteLine(_rm?.GetString("ExerciseSucDel", _culture));
+                                        else
+                                            Console.WriteLine(_rm?.GetString("ExerciseNotFound", _culture));
+                                    }
+                                    Console.Write("\n" + _rm?.GetString("ReturnSettingsMenu", _culture));
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                    continue;
+
+                                case ConsoleKey.M:
+                                    if (userController.CurrentUser is null || userController.CurrentUser.Name != "admin") 
+                                    {
+                                        Console.Clear();
+                                        continue;
+                                    }
+    
+                                    Console.Write(_rm?.GetString("Del_EnterMealName", _culture));
+                                    var mealName = Console.ReadLine();
+
+                                    using (
+                                        var foodIntakeContr = new FoodIntakeController(userController.CurrentUser,
+                                        DateTime.Now,
+                                        _dataService))
+                                    {
+                                        if (foodIntakeContr.DeleteMeal(mealName))
+                                            Console.WriteLine(_rm?.GetString("MealSucDel", _culture));
+                                        else
+                                            Console.WriteLine(_rm?.GetString("MealNotFound", _culture));
+                                    }
+                                    Console.Write("\n" + _rm?.GetString("ReturnSettingsMenu", _culture));
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                    continue;
+
+                                case ConsoleKey.F:
+                                    Console.Write(_rm?.GetString("Del_EnterFoodIntakeMoment", _culture));
+                                    var foodIntakeMoment = GetParsedValue<DateTime>(
+                                        _rm?.GetString("foodIntakeMoment", _culture) ?? "moment of the food intake");
+
+                                    using (
+                                        var foodIntakeContr = new FoodIntakeController(userController.CurrentUser,
+                                        DateTime.Now, 
+                                        _dataService))
+                                    {
+                                        if (foodIntakeContr.DeleteFoodIntake(foodIntakeMoment))
+                                            Console.WriteLine(_rm?.GetString("FoodIntakeSucDel", _culture));
+                                        else
+                                            Console.WriteLine(_rm?.GetString("FoodIntakeNotFound", _culture));
+                                    }
+                                    Console.Write("\n" + _rm?.GetString("ReturnSettingsMenu", _culture));
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                    continue;
+
+                                case ConsoleKey.D:
+                                    while (true)
+                                    {
+                                        Console.WriteLine(_rm?.GetString("DeleteAccount?", _culture) + "\n" + _rm?.GetString("Confirmation", _culture));
+                                        var delConfirmation = Console.ReadKey();
+
+                                        switch (delConfirmation.Key)
+                                        {
+                                            default:
+                                                continue;
+
+                                            case ConsoleKey.Y:
+                                                userController.DeleteCurrentUser();
+                                                Console.WriteLine(_rm?.GetString("SucsDel", _culture));
+                                                Console.ReadKey();
+                                                Environment.Exit(0);
+                                                break;
+
+                                            case ConsoleKey.N:
+                                                Console.WriteLine(_rm?.GetString("ThankForStaying", _culture));
+                                                Console.Write("\n" + _rm?.GetString("ReturnSettingsMenu", _culture));
+                                                Console.ReadKey();
+                                                Console.Clear();
+                                                break;
+                                        }
+                                        break;
+                                    }
+                                    continue;
+
+                                case ConsoleKey.S:
+                                    while (true)
+                                    {
+                                        if (userController.CurrentUser is null || userController.CurrentUser.Name != "admin") break;
+
+                                        Console.WriteLine(_rm?.GetString("SelectDataService", _culture) + "\n");
+                                        Console.WriteLine(_rm?.GetString("Service_Database", _culture));
+                                        Console.WriteLine(_rm?.GetString("Service_Serialization", _culture));
+                                        Console.WriteLine(_rm?.GetString("R_ReturnSettingsMenu", _culture));
+                                        var selectService = Console.ReadKey();
+
+                                        switch (selectService.Key)
+                                        {
+                                            case ConsoleKey.D:
+                                                _dataService = new DatabaseService("MyFitness.db");
+                                                Console.Write(_rm?.GetString("ServiceSucChangedDb", _culture));
+
+                                                Console.Write("\n" + _rm?.GetString("AppExit", _culture));
+                                                Console.ReadKey();
+                                                Environment.Exit(0);
+                                                break;
+
+                                            case ConsoleKey.S:
+                                                _dataService = new SerializationService();
+                                                Console.Write(_rm?.GetString("ServiceSucChangedSer", _culture));
+
+                                                Console.Write("\n" + _rm?.GetString("AppExit", _culture));
+                                                Console.ReadKey();
+                                                Environment.Exit(0);
+                                                break;
+
+                                            case ConsoleKey.R:
+                                                break;
+
+                                            default:
+                                                Console.Clear();
+                                                continue;
+                                        }
+                                        break;
+                                    }
+                                    Console.Clear();
+                                    continue;
+
+                                case ConsoleKey.R:
+                                    Console.Clear();
                                     break;
 
-                                case ConsoleKey.N:
-                                    Console.WriteLine(_rm?.GetString("ThankForStaying", _culture));
-                                    break;
+                                default:
+                                    Console.Clear();
+                                    continue;
                             }
                             break;
                         }
-                        break;
+                        continue;
 
                     case ConsoleKey.Q:
                         break;
 
                     default:
+                        Console.Clear();
                         continue;
                 }
                 break;

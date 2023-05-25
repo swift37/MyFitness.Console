@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Languages\Lang.resx">
+      <SubType>Designer</SubType>
       <LastGenOutput>Lang.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>

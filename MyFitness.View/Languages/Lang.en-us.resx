@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActivityNotFound" xml:space="preserve">
+    <value>Activity was not found</value>
+  </data>
+  <data name="ActivitySucDel" xml:space="preserve">
+    <value>Activity successfully deleted</value>
+  </data>
   <data name="AddAnotherMeal?" xml:space="preserve">
     <value>Would you like to add another meal?</value>
   </data>
@@ -137,6 +143,9 @@
   </data>
   <data name="AmountBurnedKcal" xml:space="preserve">
     <value>Amount of kilocalories burned: </value>
+  </data>
+  <data name="AppExit" xml:space="preserve">
+    <value>Press any key to exit the application</value>
   </data>
   <data name="AppStarted" xml:space="preserve">
     <value>MyFitness was started!</value>
@@ -159,11 +168,20 @@
   <data name="dateOfBirth" xml:space="preserve">
     <value>date of birth</value>
   </data>
-  <data name="DelCurUser" xml:space="preserve">
-    <value>D - Delete current user</value>
-  </data>
   <data name="DeleteAccount?" xml:space="preserve">
     <value>Do you really want to delete your account?</value>
+  </data>
+  <data name="Del_EnterActivityName" xml:space="preserve">
+    <value>Enter the name of the activity you want to delete: </value>
+  </data>
+  <data name="Del_EnterExerciseStartTime" xml:space="preserve">
+    <value>Enter the time or date and start time of the exercise you want to delete: </value>
+  </data>
+  <data name="Del_EnterFoodIntakeMoment" xml:space="preserve">
+    <value>Enter the moment (date and time) of the food intake you want to delete: </value>
+  </data>
+  <data name="Del_EnterMealName" xml:space="preserve">
+    <value>Enter the name of the meal you want to delete: </value>
   </data>
   <data name="Duration" xml:space="preserve">
     <value>Duration: </value>
@@ -219,11 +237,29 @@
   <data name="EnterWeight" xml:space="preserve">
     <value>Enter weight (in kilograms): </value>
   </data>
+  <data name="ExerciseNotFound" xml:space="preserve">
+    <value>Exercise was not found</value>
+  </data>
+  <data name="exerciseStartTime" xml:space="preserve">
+    <value>time or date and start time of the exercise</value>
+  </data>
+  <data name="ExerciseSucDel" xml:space="preserve">
+    <value>Exercise successfully deleted</value>
+  </data>
   <data name="Exit" xml:space="preserve">
     <value>Q - Exit</value>
   </data>
   <data name="Fats" xml:space="preserve">
     <value>Fats: </value>
+  </data>
+  <data name="foodIntakeMoment" xml:space="preserve">
+    <value>moment of the food intake</value>
+  </data>
+  <data name="FoodIntakeNotFound" xml:space="preserve">
+    <value>Food intake was not found</value>
+  </data>
+  <data name="FoodIntakeSucDel" xml:space="preserve">
+    <value>Food intake successfully deleted</value>
   </data>
   <data name="fts" xml:space="preserve">
     <value>fats</value>
@@ -248,6 +284,12 @@
   </data>
   <data name="kg" xml:space="preserve">
     <value>kg</value>
+  </data>
+  <data name="MealNotFound" xml:space="preserve">
+    <value>Meal was not found</value>
+  </data>
+  <data name="MealSucDel" xml:space="preserve">
+    <value>Meal successfully deleted</value>
   </data>
   <data name="mealWeight" xml:space="preserve">
     <value>meal weight</value>
@@ -300,8 +342,53 @@
   <data name="ReturnMainMenu" xml:space="preserve">
     <value>Press any key to return to the main menu...</value>
   </data>
+  <data name="ReturnSettingsMenu" xml:space="preserve">
+    <value>Press any key to return to the settings menu...</value>
+  </data>
+  <data name="R_ReturnSettingsMenu" xml:space="preserve">
+    <value>R - Return to the settings menu</value>
+  </data>
   <data name="SelectAction" xml:space="preserve">
     <value>Select an action:</value>
+  </data>
+  <data name="SelectDataService" xml:space="preserve">
+    <value>Select the desired data service for the application</value>
+  </data>
+  <data name="ServiceSucChangedDb" xml:space="preserve">
+    <value>Application data service successfully changed to database service</value>
+  </data>
+  <data name="ServiceSucChangedSer" xml:space="preserve">
+    <value>Application data service successfully changed to serialization service</value>
+  </data>
+  <data name="Service_Database" xml:space="preserve">
+    <value>D - Database service</value>
+  </data>
+  <data name="Service_Serialization" xml:space="preserve">
+    <value>S - Serialization service</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>S - Settings</value>
+  </data>
+  <data name="Settings_DelActivity" xml:space="preserve">
+    <value>A - Delete actvity</value>
+  </data>
+  <data name="Settings_DelCurUser" xml:space="preserve">
+    <value>D - Delete current user</value>
+  </data>
+  <data name="Settings_DelExercise" xml:space="preserve">
+    <value>E - Delete exercise</value>
+  </data>
+  <data name="Settings_DelFoodIntake" xml:space="preserve">
+    <value>F - Delete food intake</value>
+  </data>
+  <data name="Settings_DelMeal" xml:space="preserve">
+    <value>M - Delete meal</value>
+  </data>
+  <data name="Settings_ReturnMainMenu" xml:space="preserve">
+    <value>R - Return to the main menu</value>
+  </data>
+  <data name="Settings_SwitchDataService" xml:space="preserve">
+    <value>S - Switch data service</value>
   </data>
   <data name="startExTime" xml:space="preserve">
     <value>start time of the exercise</value>
