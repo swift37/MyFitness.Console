@@ -68,7 +68,7 @@ namespace MyFitness.BL.Controllers.Tests
         }
 
         [TestMethod()]
-        public void DeleteExerciseTest()
+        public void DeleteExerciseDatabaseTest()
         {
             // Arrange
             var dataServiceDb = new DatabaseService("MyFitnessTest.db");
@@ -98,10 +98,72 @@ namespace MyFitness.BL.Controllers.Tests
         }
 
         [TestMethod()]
-        public void DeleteActivityTest()
+        public void DeleteExerciseSerializationTest()
+        {
+            // Arrange
+            var dataServiceDb = new SerializationService();
+
+            var username = Guid.NewGuid().ToString();
+            var activityName = Guid.NewGuid().ToString();
+            var rnd = new Random();
+            var activityKcals = rnd.NextDouble() * 1000;
+            var exStartTime = DateTime.UtcNow.AddMinutes(-60);
+            var exEndTime = DateTime.UtcNow;
+
+            var userContrDb = new UserController(username, dataServiceDb);
+            userContrDb.CreateUserData(Guid.NewGuid().ToString(), DateTime.Now.AddYears(-20), 180, 70);
+
+            var exContrDb = new ExerciseController(userContrDb.CurrentUser, dataServiceDb);
+
+            var activity = new Activity(activityName, activityKcals);
+
+            // Act
+            exContrDb.Add(activity, exStartTime, exEndTime);
+            exContrDb.DeleteExercise(exStartTime);
+
+            // Assert
+            Assert.IsNotNull(dataServiceDb.LoadData<Exercise>());
+            Assert.IsNull(dataServiceDb.LoadData<Exercise>()?.FirstOrDefault(
+                ex => ex.Start.ToString() == exStartTime.ToString() && ex.User?.Name == username));
+        }
+
+        [TestMethod()]
+        public void DeleteActivityDatabaseTest()
         {
             // Arrange
             var dataServiceDb = new DatabaseService("MyFitnessTest.db");
+
+            var username = Guid.NewGuid().ToString();
+            var activityName = Guid.NewGuid().ToString();
+            var rnd = new Random();
+            var activityKcals = rnd.NextDouble() * 1000;
+            var exStartTime = DateTime.UtcNow.AddMinutes(-60);
+
+            var userContrDb = new UserController(username, dataServiceDb);
+            userContrDb.CreateUserData(Guid.NewGuid().ToString(), DateTime.Now.AddYears(-20), 180, 70);
+
+            var exContrDb = new ExerciseController(userContrDb.CurrentUser, dataServiceDb);
+
+            var activity = new Activity(activityName, activityKcals);
+
+            // Act
+            exContrDb.Add(activity, DateTime.UtcNow.AddMinutes(-60), DateTime.UtcNow);
+
+            exContrDb.DeleteActivity(activityName);
+            exContrDb.DeleteExercise(exStartTime);
+            userContrDb.DeleteCurrentUser();
+
+            // Assert
+            Assert.IsNotNull(dataServiceDb.LoadData<Activity>());
+            Assert.IsNull(dataServiceDb.LoadData<Activity>()?.FirstOrDefault(
+                a => a.Name == activityName && a.KilocaloriesPerHour == activityKcals));
+        }
+
+        [TestMethod()]
+        public void DeleteActivitySerializationTest()
+        {
+            // Arrange
+            var dataServiceDb = new SerializationService();
 
             var username = Guid.NewGuid().ToString();
             var activityName = Guid.NewGuid().ToString();

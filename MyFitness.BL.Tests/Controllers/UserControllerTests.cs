@@ -78,10 +78,32 @@ namespace MyFitness.BL.Controllers.Tests
         }
 
         [TestMethod()]
-        public void DeleteCurrentUserTest()
+        public void DeleteCurrentUserDatabaseTest()
         {
             // Arrange
             var dataService = new DatabaseService("MyFitnessTest.db");
+            var username = Guid.NewGuid().ToString();
+            var gender = Guid.NewGuid().ToString();
+            var dateOfBirth = DateTime.Now.AddYears(-20);
+            var weight = 70;
+            var height = 180;
+
+            var userContrDb = new UserController(username, dataService);
+
+            // Act
+            userContrDb.CreateUserData(gender, dateOfBirth, weight, height);
+            userContrDb.DeleteCurrentUser();
+
+            // Assert
+            Assert.IsNotNull(dataService.LoadData<User>());
+            Assert.IsNull(dataService.LoadData<User>()?.SingleOrDefault(user => user.Name == username));
+        }
+
+        [TestMethod()]
+        public void DeleteCurrentUserSerializationTest()
+        {
+            // Arrange
+            var dataService = new SerializationService();
             var username = Guid.NewGuid().ToString();
             var gender = Guid.NewGuid().ToString();
             var dateOfBirth = DateTime.Now.AddYears(-20);

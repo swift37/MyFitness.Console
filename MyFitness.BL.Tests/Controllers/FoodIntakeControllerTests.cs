@@ -73,7 +73,7 @@ namespace MyFitness.BL.Controllers.Tests
         }
 
         [TestMethod()]
-        public void DeleteFoodIntakeTest()
+        public void DeleteFoodIntakeDatabaseTest()
         {
             // Arrange
             var dataServiceDb = new DatabaseService("MyFitnessTest.db");
@@ -104,10 +104,75 @@ namespace MyFitness.BL.Controllers.Tests
         }
 
         [TestMethod()]
-        public void DeleteMealTest()
+        public void DeleteFoodIntakeSerializationTest()
+        {
+            // Arrange
+            var dataServiceDb = new SerializationService();
+
+            var username = Guid.NewGuid().ToString();
+            var mealName = Guid.NewGuid().ToString();
+            var rnd = new Random();
+            var mealWeight = rnd.NextDouble() * 1000;
+            var foodIntakeMoment = DateTime.UtcNow;
+
+            var userContrDb = new UserController(username, dataServiceDb);
+            userContrDb.CreateUserData(Guid.NewGuid().ToString(), DateTime.Now.AddYears(-20), 180, 70);
+
+            var foodIntakeContrDb = new FoodIntakeController(userContrDb.CurrentUser, foodIntakeMoment, dataServiceDb);
+
+            var meal = new Meal(mealName, rnd.Next(900), false);
+
+            // Act
+            foodIntakeContrDb.Add(meal, mealWeight);
+            foodIntakeContrDb.Save();
+
+            foodIntakeContrDb.DeleteFoodIntake(foodIntakeMoment);
+
+            // Assert
+            Assert.IsNotNull(dataServiceDb.LoadData<FoodIntake>());
+            Assert.IsNull(dataServiceDb.LoadData<FoodIntake>()?.SingleOrDefault(
+                fI => fI.Moment.ToString() == foodIntakeMoment.ToString() && fI.User?.Name == username));
+        }
+
+        [TestMethod()]
+        public void DeleteMealDatabaseTest()
         {
             // Arrange
             var dataServiceDb = new DatabaseService("MyFitnessTest.db");
+
+            var username = Guid.NewGuid().ToString();
+            var mealName = Guid.NewGuid().ToString();
+            var rnd = new Random();
+            var mealCalories = rnd.Next(900);
+            var mealWeight = rnd.NextDouble() * 1000;
+            var foodIntakeMoment = DateTime.UtcNow;
+
+            var userContrDb = new UserController(username, dataServiceDb);
+            userContrDb.CreateUserData(Guid.NewGuid().ToString(), DateTime.Now.AddYears(-20), 180, 70);
+
+            var foodIntakeContrDb = new FoodIntakeController(userContrDb.CurrentUser, foodIntakeMoment, dataServiceDb);
+
+            var meal = new Meal(mealName, mealCalories, false, rnd.Next(50), rnd.Next(100), rnd.Next(100));
+
+            // Act
+            foodIntakeContrDb.Add(meal, mealWeight);
+            foodIntakeContrDb.Save();
+
+            foodIntakeContrDb.DeleteMeal(mealName);
+            foodIntakeContrDb.DeleteFoodIntake(foodIntakeMoment);
+            userContrDb.DeleteCurrentUser();
+
+            // Assert
+            Assert.IsNotNull(dataServiceDb.LoadData<Meal>());
+            Assert.IsNull(dataServiceDb.LoadData<Meal>()?.SingleOrDefault(
+                m => m.Name == mealName && m.Kilocalories == mealCalories));
+        }
+
+        [TestMethod()]
+        public void DeleteMealSerializationTest()
+        {
+            // Arrange
+            var dataServiceDb = new SerializationService();
 
             var username = Guid.NewGuid().ToString();
             var mealName = Guid.NewGuid().ToString();

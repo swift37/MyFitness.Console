@@ -62,9 +62,6 @@ namespace MyFitness.BL.Controllers
                 meal.Id = ++newMealId;
             }
 
-            //if (FoodIntakes.SingleOrDefault(f => f.Moment.ToString() == FoodIntake.Moment.ToString()) is null) 
-            //    FoodIntakes.Add(FoodIntake);
-
             FoodIntake.Add(meal, weight);
         }
 
