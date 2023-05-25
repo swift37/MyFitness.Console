@@ -1,4 +1,5 @@
 ﻿using Librarian.DAL.Entities.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
 namespace MyFitness.BL.Models
@@ -18,6 +19,7 @@ namespace MyFitness.BL.Models
         /// <summary>
         /// Birth date.
         /// </summary>
+        [Column(TypeName = "date")]
         [DataMember(Name = "date_of_birth")]
         public DateTime DateOfBirth { get; set; }
 
@@ -54,7 +56,7 @@ namespace MyFitness.BL.Models
         [DataMember(Name = "bmi")]
         public double BMI 
         {
-            get => Weight / (Height / 100 * (Height / 100)); 
+            get => Math.Round(Weight / (Height / 100 * (Height / 100)), 2); 
             set { } 
         }
 

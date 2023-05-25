@@ -20,5 +20,10 @@ namespace MyFitness.BL.Context
         public DbSet<User>? Users { get; set; }
 
         public FitnessDbContext(string connectrionString) : base(connectrionString) { }
+
+        /// <summary>
+        /// No parameterless constructor for creating migrations
+        /// </summary>
+        public FitnessDbContext () : base () { }
     }
 }

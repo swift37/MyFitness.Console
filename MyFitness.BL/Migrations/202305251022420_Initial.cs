@@ -40,7 +40,7 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        DateOfBirth = c.DateTime(nullable: false),
+                        DateOfBirth = c.DateTime(nullable: false, storeType: "date"),
                         Weight = c.Double(nullable: false),
                         Height = c.Double(nullable: false),
                         Age = c.Int(nullable: false),

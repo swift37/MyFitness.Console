@@ -144,6 +144,9 @@
   <data name="Carbs" xml:space="preserve">
     <value>Carbohydrates: </value>
   </data>
+  <data name="cm" xml:space="preserve">
+    <value>cm</value>
+  </data>
   <data name="Confirmation" xml:space="preserve">
     <value>Press Y to confirm or N to refuse</value>
   </data>
@@ -243,6 +246,9 @@
   <data name="kcals" xml:space="preserve">
     <value>kilocalories</value>
   </data>
+  <data name="kg" xml:space="preserve">
+    <value>kg</value>
+  </data>
   <data name="mealWeight" xml:space="preserve">
     <value>meal weight</value>
   </data>
@@ -260,6 +266,30 @@
   </data>
   <data name="productVolume" xml:space="preserve">
     <value>product volume</value>
+  </data>
+  <data name="Profile_Age" xml:space="preserve">
+    <value>Age: </value>
+  </data>
+  <data name="Profile_BMI" xml:space="preserve">
+    <value>BMI: </value>
+  </data>
+  <data name="Profile_DateOfBirth" xml:space="preserve">
+    <value>Date of birth: </value>
+  </data>
+  <data name="Profile_Gender" xml:space="preserve">
+    <value>Gender: </value>
+  </data>
+  <data name="Profile_Height" xml:space="preserve">
+    <value>Height: </value>
+  </data>
+  <data name="Profile_Username" xml:space="preserve">
+    <value>Username: </value>
+  </data>
+  <data name="Profile_UserProfile" xml:space="preserve">
+    <value>User profile</value>
+  </data>
+  <data name="Profile_Weight" xml:space="preserve">
+    <value>Weight: </value>
   </data>
   <data name="Proteins" xml:space="preserve">
     <value>Proteins: </value>
@@ -294,7 +324,13 @@
   <data name="UserFoodIntakes" xml:space="preserve">
     <value>I - List of all your food intakes</value>
   </data>
+  <data name="UserProfile" xml:space="preserve">
+    <value>U - User profile</value>
+  </data>
   <data name="weight" xml:space="preserve">
     <value>weight</value>
+  </data>
+  <data name="yo" xml:space="preserve">
+    <value>y.o.</value>
   </data>
 </root>

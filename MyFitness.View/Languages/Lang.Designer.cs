@@ -142,6 +142,15 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to cm.
+        /// </summary>
+        internal static string cm {
+            get {
+                return ResourceManager.GetString("cm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Press Y to confirm or N to refuse.
         /// </summary>
         internal static string Confirmation {
@@ -439,6 +448,15 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to kg.
+        /// </summary>
+        internal static string kg {
+            get {
+                return ResourceManager.GetString("kg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to meal weight.
         /// </summary>
         internal static string mealWeight {
@@ -489,6 +507,78 @@ namespace MyFitness.View.Languages {
         internal static string productVolume {
             get {
                 return ResourceManager.GetString("productVolume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Age: .
+        /// </summary>
+        internal static string Profile_Age {
+            get {
+                return ResourceManager.GetString("Profile_Age", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BMI: .
+        /// </summary>
+        internal static string Profile_BMI {
+            get {
+                return ResourceManager.GetString("Profile_BMI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date of birth: .
+        /// </summary>
+        internal static string Profile_DateOfBirth {
+            get {
+                return ResourceManager.GetString("Profile_DateOfBirth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gender: .
+        /// </summary>
+        internal static string Profile_Gender {
+            get {
+                return ResourceManager.GetString("Profile_Gender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height: .
+        /// </summary>
+        internal static string Profile_Height {
+            get {
+                return ResourceManager.GetString("Profile_Height", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username: .
+        /// </summary>
+        internal static string Profile_Username {
+            get {
+                return ResourceManager.GetString("Profile_Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User profile.
+        /// </summary>
+        internal static string Profile_UserProfile {
+            get {
+                return ResourceManager.GetString("Profile_UserProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weight: .
+        /// </summary>
+        internal static string Profile_Weight {
+            get {
+                return ResourceManager.GetString("Profile_Weight", resourceCulture);
             }
         }
         
@@ -592,11 +682,29 @@ namespace MyFitness.View.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to U - User profile.
+        /// </summary>
+        internal static string UserProfile {
+            get {
+                return ResourceManager.GetString("UserProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to weight.
         /// </summary>
         internal static string weight {
             get {
                 return ResourceManager.GetString("weight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to y.o..
+        /// </summary>
+        internal static string yo {
+            get {
+                return ResourceManager.GetString("yo", resourceCulture);
             }
         }
     }

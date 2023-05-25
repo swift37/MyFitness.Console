@@ -57,6 +57,7 @@ namespace MyFitness.View
             {
                 Console.WriteLine("\n" + _rm?.GetString("CurrentUser", _culture) + userController.CurrentUser);
                 Console.WriteLine("\n" + _rm?.GetString("SelectAction", _culture));
+                Console.WriteLine(_rm?.GetString("UserProfile", _culture));
                 Console.WriteLine(_rm?.GetString("AddFoodIntake", _culture));
                 Console.WriteLine(_rm?.GetString("AddExercise", _culture));
                 Console.WriteLine(_rm?.GetString("UserFoodIntakes", _culture));
@@ -70,6 +71,34 @@ namespace MyFitness.View
 
                 switch (key.Key)
                 {
+                    case ConsoleKey.U:
+                        Console.WriteLine(_rm?.GetString("Profile_UserProfile", _culture) + "\n");
+
+                        Console.WriteLine(_rm?.GetString("Profile_Username", _culture) 
+                            + userController.CurrentUser?.Name ?? "none");
+
+                        Console.WriteLine(_rm?.GetString("Profile_Age", _culture) 
+                            + userController.CurrentUser?.Age + " " + _rm?.GetString("yo", _culture));
+
+                        Console.WriteLine(_rm?.GetString("Profile_Gender", _culture) 
+                            + userController.CurrentUser?.Gender?.Name ?? "no data");
+
+                        Console.WriteLine(_rm?.GetString("Profile_DateOfBirth", _culture) 
+                            + userController.CurrentUser?.DateOfBirth.ToShortDateString());
+
+                        Console.WriteLine(_rm?.GetString("Profile_Height", _culture) 
+                            + userController.CurrentUser?.Height + " " + _rm?.GetString("cm", _culture));
+
+                        Console.WriteLine(_rm?.GetString("Profile_Weight", _culture) 
+                            + userController.CurrentUser?.Weight + " " + _rm?.GetString("kg", _culture));
+
+                        Console.WriteLine(_rm?.GetString("Profile_BMI", _culture) + userController.CurrentUser?.BMI);
+
+                        Console.Write("\n" + _rm?.GetString("ReturnMainMenu", _culture));
+                        Console.ReadKey();
+                        Console.Clear();
+                        continue;
+
                     case ConsoleKey.F:
                         AddFoodIntake(userController.CurrentUser);
                         continue;
